@@ -258,7 +258,7 @@ end
 ########### APPOINTMENT #################
   
   timenow = Time.now
-  ##(1..60).each do |i|
+  (1..60).each do |i|
       startdate = rand(timenow..t2)
       
     appointment = Appointment.new(
@@ -270,8 +270,8 @@ end
     points:rand(5..100))
     appointment.save
 
-  #puts "Appointment seed n°#{i}"
-  #end
+  puts "Appointment seed n°#{i}"
+  end
 
 ########### PRODUCT_EVENT #################
 

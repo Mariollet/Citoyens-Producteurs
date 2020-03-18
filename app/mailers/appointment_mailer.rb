@@ -19,7 +19,7 @@ class AppointmentMailer < ApplicationMailer
 
     @url  = 'www.citoyens-producteurs.fr' 
     # c'est cet appel à mail() qui permet d'envoyer l’e-mail en définissant destinataire et sujet.
-    mail(to: @user_email, subject: 'Tu as rejoint un évènement Citoyens !') 
+    #mail(to: @user_email, subject: 'Tu as rejoint un évènement Citoyens !') 
   end
 
   def new_appointment_creator(appointment)
@@ -42,7 +42,7 @@ class AppointmentMailer < ApplicationMailer
     
     @url  = 'www.citoyens-producteurs.fr' 
     # c'est cet appel à mail() qui permet d'envoyer l’e-mail en définissant destinataire et sujet.
-    mail(to: @creator_email, subject: 'Un nouveau Citoyen s\'est inscrit à ton évènement!') 
+    #mail(to: @creator_email, subject: 'Un nouveau Citoyen s\'est inscrit à ton évènement!') 
   end
 
   def destroy_appointment_creator(appointment)
@@ -65,8 +65,7 @@ class AppointmentMailer < ApplicationMailer
     
     @url  = 'www.citoyens-producteurs.fr' 
     # c'est cet appel à mail() qui permet d'envoyer l’e-mail en définissant destinataire et sujet.
-    mail(to: @creator_email, subject: 'Un Citoyen s\'est désinscrit à ton évè
-    nement !') 
+    #mail(to: @creator_email, subject: 'Un Citoyen s\'est désinscrit à ton évènement !') 
   end
 
   def destroy_appointment_user(appointment)
@@ -87,6 +86,6 @@ class AppointmentMailer < ApplicationMailer
 
     @url  = 'www.citoyens-producteurs.fr' 
     # c'est cet appel à mail() qui permet d'envoyer l’e-mail en définissant destinataire et sujet.
-    mail(to: @user_email, subject: 'Tu as quitté un évènement Citoyens !') 
+    #mail(to: @user_email, subject: 'Tu as quitté un évènement Citoyens !') 
   end
 end

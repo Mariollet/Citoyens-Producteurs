@@ -33,6 +33,12 @@ Product.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!('products')
 Unit.destroy_all
 ActiveRecord::Base.connection.reset_pk_sequence!('units')
+Blog.destroy_all
+ActiveRecord::Base.connection.reset_pk_sequence!('blogs')
+Like.destroy_all
+ActiveRecord::Base.connection.reset_pk_sequence!('like')
+BlogComment.destroy_all
+ActiveRecord::Base.connection.reset_pk_sequence!('blog_comment')
 
 ################# DATABASE DESTROY ##########################
 require 'faker'
@@ -40,7 +46,6 @@ require 'time'
 
 t1 = Time.parse("2019-02-12 00:00:00")
 t2 = Time.parse("2020-06-01 00:00:00")
-tnow = DateTime.now
 ########### Unit ###########
 array_unit = ["kg", "L", "unités","pots","bottes"]
 arrayunitlength = array_unit.length
@@ -50,7 +55,7 @@ arrayunitlength = array_unit.length
   name: array_unit[i]
   )
   unit.save
-  puts "unit n°#{i} done"
+  puts "Unit n°#{i + 1} done"
 end
 
 ########### PRODUCT #################
@@ -70,9 +75,8 @@ end
     name:Faker::Food.ingredient,
     )
   product.save
+  puts "Prdouct n°#{i + 1} done"
 end
-
-puts "Product seed done, load 30 products"
 
 ########### ADDRESS #################
 
@@ -82,24 +86,24 @@ puts "Product seed done, load 30 products"
     place:Faker::Address.street_name,
     zip_code: "92340",
     city: "Bourg-la-Reine",
-    sector: ["Bobo","Riche","Pauvre","Hopitaux","Centre"].sample, 
+    sector: ["Peyrou","Comedie","Gare","Préfecture","Centre"].sample, 
   )
   address.save
-  puts "Address seed n° #{i}"
+  puts "Address seed n° #{i + 1}"
 end
 
 ########### EVENT_TYPE #################
 
-event_type_array = ["Harvest","Sell","Cooking","Fruit jam preparation","Kermesse","crop", "picking","Store","Inventory", "Accounting"]
+event_type_array = ["Harvest","Sell","Cooking","Store"]
 
-(0..8).each do |i|
+(0..3).each do |i|
 
   event_type = EventType.new(
     name: event_type_array[i],
   )
   event_type.save
 
-  puts "Event_type seed n° #{i}"
+  puts "Event_type seed n° #{i + 1}"
 end
 
 ########### STORE #################
@@ -110,21 +114,11 @@ end
     address_id:rand(1..20),
   )
   store.save
-  puts "Store seed n° #{i}"
+  puts "Store seed n° #{i + 1}"
 end
 
 ########### USER #################
-user = User.new(
-  first_name: "Admin", 
-  last_name: "NIstrator", 
-  email: "admin@yopmail.com", 
-  password: "azerty34",
-  address_id:rand(1..20),
-  store_id: "2",
-  phone_number:Faker::PhoneNumber.phone_number,
-  is_admin: true, 
-)
-user.save
+
 user = User.new(
   first_name: "Anthony", 
   last_name: "Phim", 
@@ -196,12 +190,13 @@ puts "Lana done"
     email:"#{username}.#{lastnameuser}@yopmail.com", 
     password:"azerty34",
     address_id:rand(1..20),
-    store_id: rand(1..10),
+    store_id: rand(1..3),
+    avatar: "avatar_#{rand(1..5)}",
     phone_number:Faker::PhoneNumber.phone_number,
   )
 
   user.save
-  puts "User seed n°#{i}" 
+  puts "User seed n°#{i + 1}" 
 end
 
 ########### STORE_PRODUCT 3rd #################
@@ -209,7 +204,7 @@ end
 (1..25).each do |i|
   storeproduct = StoreProduct.new(
     product_id:rand(0..30),
-    store_id:rand(0..10),
+    store_id:rand(0..3),
     quantity:rand(2..99),
     unit_id: rand(0..arrayunitlength),
   )
@@ -246,23 +241,24 @@ end
   )
   event.save
   puts "Other event seed n° #{i}"
-  end
+end
+
 ########### COMMENT #################
 
-(1..30).each do |i|
+(1..100).each do |i|
   comment = Comment.new(
-    text:Faker::Lorem.characters(number: 200),
+    text:Faker::Hacker.say_something_smart,
     user_id:rand(1..20),
     event_id:rand(1..25),
   )
   comment.save
-  puts "comment seed n° #{i}"
+  puts "Comment seed n° #{i}"
 end
 
 ########### APPOINTMENT #################
   
   timenow = Time.now
-  (1..25).each do |i|
+  ##(1..60).each do |i|
       startdate = rand(timenow..t2)
       
     appointment = Appointment.new(
@@ -274,12 +270,12 @@ end
     points:rand(5..100))
     appointment.save
 
-  puts "Appointment seed n°#{i} done"
-  end
+  #puts "Appointment seed n°#{i}"
+  #end
 
 ########### PRODUCT_EVENT #################
 
-(1..25).each do |i|
+(1..50).each do |i|
   productevent = ProductEvent.new(
     product_id:i,
     event_id:i ,
@@ -288,13 +284,13 @@ end
   )
   productevent.save
   
-puts "Product Event seed n°#{i} done"
+puts "Product Event seed n°#{i}"
 end
 
 
 ########### PRODUCT_APPOINTMENT #################
 
-(1..25).each do |i|
+(1..50).each do |i|
   productappointment = ProductAppointment.new(
     product_id: rand(1..30),
     appointment_id:rand(1..25),
@@ -302,7 +298,7 @@ end
     unit_id: rand(1..arrayunitlength),
   )
   productappointment.save
-  puts "Product_appointment seed n°#{i} done"
+  puts "Product_appointment seed n°#{i}"
 end
 
 ########### BLOG #################
@@ -311,19 +307,19 @@ end
 
   blog = Blog.new(
   title: Faker::Restaurant.name,
-  content: Faker::Restaurant.description,
+  content: Faker::Restaurant.description * 6,
   user_id: rand(1..20), 
   )
   blog.save
 
-  puts "Blog seed n° #{i + 5}"
+  puts "Blog seed n° #{i + 1}"
 end
 
 ########### BLOG_COMMENT #################
 
-(1..40).each do |i|
+(1..80).each do |i|
   comment = BlogComment.new(
-    text:Faker::Lorem.characters(number: 200),
+    text:Faker::Hacker.say_something_smart,
     user_id:rand(1..20),
     blog_id:rand(1..30),
   )
@@ -333,7 +329,7 @@ end
 
 ########### BLOG_LIKE #################
 
-(1..30).each do |i|
+(1..111).each do |i|
   like = Like.new(
     user_id:rand(1..20),
     blog_id:rand(1..30),

@@ -256,22 +256,21 @@ end
 end
 
 ########### APPOINTMENT #################
-  
-  timenow = Time.now
-  (1..60).each do |i|
-      startdate = rand(timenow..t2)
-      
-    appointment = Appointment.new(
-    user_id:rand(1..20),
-    event_id:rand(1..25),
-    start_date: startdate,
-    duration:rand(30..300)*5,
-    status: "Future appointment",
-    points:rand(5..100))
-    appointment.save
 
-  puts "Appointment seed n°#{i}"
-  end
+timenow = Time.now
+startdate = rand(timenow..t2)
+(1..60).each do |i|
+  appointment = Appointment.new(
+  user_id:rand(1..20),
+  event_id:rand(1..25),
+  start_date: startdate,
+  duration:rand(30..300)*5,
+  status: "Future appointment",
+  points:rand(5..100))
+  appointment.save
+
+puts "Appointment seed n°#{i}"
+end
 
 ########### PRODUCT_EVENT #################
 

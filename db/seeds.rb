@@ -38,8 +38,8 @@ ActiveRecord::Base.connection.reset_pk_sequence!('units')
 require 'faker'
 require 'time'
 
-t1 = Time.parse("2019-12-13 00:40:00")
-t2 = Time.parse("2020-02-01 00:00:00")
+t1 = Time.parse("2019-02-12 00:00:00")
+t2 = Time.parse("2020-06-01 00:00:00")
 tnow = DateTime.now
 ########### Unit ###########
 array_unit = ["kg", "L", "unités","pots","bottes"]
@@ -104,7 +104,7 @@ end
 
 ########### STORE #################
 
-(0..11).each do |i|
+(0..3).each do |i|
   store = Store.new(
     name: Faker::Company.name,
     address_id:rand(1..20),
@@ -184,8 +184,9 @@ user = User.new(
   is_admin: true,
 )
 user.save
-puts "Lana done" 
-(0..15).each do |i|
+puts "Lana done"
+
+(0..20).each do |i|
   username = Faker::GreekPhilosophers.name
   lastnameuser = Faker::Creature::Cat.name
 
@@ -200,9 +201,8 @@ puts "Lana done"
   )
 
   user.save
-  puts "user seed n°#{i}" 
+  puts "User seed n°#{i}" 
 end
-puts "user DONE" 
 
 ########### STORE_PRODUCT 3rd #################
 
@@ -214,27 +214,27 @@ puts "user DONE"
     unit_id: rand(0..arrayunitlength),
   )
   storeproduct.save
-  puts "store_product seed n° #{i}"
+  puts "Store_product seed n° #{i}"
 end 
 ########### EVENT 4th #################
 
-  (1..30).each do |i|
+  (1..15).each do |i|
   startdate = rand(t1..t2)
 
   event = Event.new(
   title: Faker::Restaurant.name,
   description: Faker::Restaurant.description,
   start_date: startdate, 
-  end_date: startdate + rand(900..7600),
+  end_date: startdate + rand(900..1600),
   address_id: rand(1..20), 
   creator_id: rand(1..20), 
-  event_type_id:rand(1..8),
+  event_type_id:rand(1..3),
   )
   event.save
 
-  puts "event seed n° #{i + 5}"
+  puts "Event seed n° #{i}"
 end
-(1..6).each do |i|
+(1..15).each do |i|
   event = Event.new(
   title: Faker::Restaurant.name,
   description: Faker::Restaurant.description,
@@ -242,14 +242,14 @@ end
   end_date: DateTime.now + rand(50..700),
   address_id: rand(1..20), 
   creator_id: i, 
-  event_type_id:rand(1..8),
+  event_type_id:rand(1..3),
   )
   event.save
-  puts "event seed n° #{i}"
+  puts "Other event seed n° #{i}"
   end
 ########### COMMENT #################
 
-(1..25).each do |i|
+(1..30).each do |i|
   comment = Comment.new(
     text:Faker::Lorem.characters(number: 200),
     user_id:rand(1..20),
@@ -304,3 +304,42 @@ end
   productappointment.save
   puts "Product_appointment seed n°#{i} done"
 end
+
+########### BLOG #################
+
+(1..30).each do |i|
+
+  blog = Blog.new(
+  title: Faker::Restaurant.name,
+  content: Faker::Restaurant.description,
+  user_id: rand(1..20), 
+  )
+  blog.save
+
+  puts "Blog seed n° #{i + 5}"
+end
+
+########### BLOG_COMMENT #################
+
+(1..40).each do |i|
+  comment = BlogComment.new(
+    text:Faker::Lorem.characters(number: 200),
+    user_id:rand(1..20),
+    blog_id:rand(1..30),
+  )
+  comment.save
+  puts "Blog Comment seed n° #{i}"
+end
+
+########### BLOG_LIKE #################
+
+(1..30).each do |i|
+  like = Like.new(
+    user_id:rand(1..20),
+    blog_id:rand(1..30),
+  )
+  like.save
+  puts "Blog like seed n° #{i}"
+end
+
+puts "Seed DONE, Enjoy !"

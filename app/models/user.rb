@@ -15,7 +15,7 @@ class User < ApplicationRecord
   validates :email,
     presence: true,
     uniqueness: true,
-    format: { with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/, message: "email address please" }
+    format: { with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/, message: "Veuillez entrer une adresse email valide" }
   before_create :set_default_store
   after_create :welcome_send
   after_create :create_address

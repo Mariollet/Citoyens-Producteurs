@@ -318,7 +318,7 @@ end
 
 (1..80).each do |i|
   comment = BlogComment.new(
-    text:Faker::Hacker.say_something_smart,
+    text: Faker::Hacker.say_something_smart,
     user_id:rand(1..20),
     blog_id:rand(1..30),
   )

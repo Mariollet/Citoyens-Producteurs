@@ -44,8 +44,8 @@ ActiveRecord::Base.connection.reset_pk_sequence!('blog_comment')
 require 'faker'
 require 'time'
 
-t1 = Time.parse("2019-02-12 00:00:00")
-t2 = Time.parse("2020-06-01 00:00:00")
+t1 = Time.parse("2020-03-01 00:00:00")
+t2 = Time.parse("2020-05-01 00:00:00")
 ########### Unit ###########
 array_unit = ["kg", "L", "unités","pots","bottes"]
 arrayunitlength = array_unit.length
@@ -213,14 +213,14 @@ end
 end 
 ########### EVENT 4th #################
 
-  (1..15).each do |i|
+  (1..30).each do |i|
   startdate = rand(t1..t2)
 
   event = Event.new(
   title: Faker::Restaurant.name,
   description: Faker::Restaurant.description,
   start_date: startdate, 
-  end_date: startdate + rand(900..1600),
+  end_date: startdate + rand(25000..40000),
   address_id: rand(1..20), 
   creator_id: rand(1..20), 
   event_type_id:rand(1..3),
@@ -228,19 +228,6 @@ end
   event.save
 
   puts "Event seed n° #{i}"
-end
-(1..15).each do |i|
-  event = Event.new(
-  title: Faker::Restaurant.name,
-  description: Faker::Restaurant.description,
-  start_date: DateTime.now + 0.01, 
-  end_date: DateTime.now + rand(50..700),
-  address_id: rand(1..20), 
-  creator_id: i, 
-  event_type_id:rand(1..3),
-  )
-  event.save
-  puts "Other event seed n° #{i}"
 end
 
 ########### COMMENT #################

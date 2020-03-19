@@ -10,7 +10,7 @@ class UserMailer < ApplicationMailer
     @url  = 'www.citoyens-producteurs.fr' 
 
     # c'est cet appel à mail() qui permet d'envoyer l’e-mail en définissant destinataire et sujet.
-    #mail(to: @user.email, subject: 'Bienvenue chez Citoyens Producteurs !') 
+    mail(to: @user.email, subject: 'Bienvenue chez Citoyens Producteurs !') 
   end
 
   def user_has_payed(user) 
@@ -19,7 +19,7 @@ class UserMailer < ApplicationMailer
 
     @url = 'www.citoyens-producteurs.fr'
 
-    #mail(to: @user.email, subject: 'Merci d\'avoir payé ta cotisation pour  Citoyens Producteurs !') 
+    mail(to: @user.email, subject: 'Merci d\'avoir payé ta cotisation pour  Citoyens Producteurs !') 
   end
 
 end

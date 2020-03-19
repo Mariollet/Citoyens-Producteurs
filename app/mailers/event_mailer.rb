@@ -12,7 +12,7 @@ class EventMailer < ApplicationMailer
    #on définit une variable @url qu'on utilisera dans la view d’e-mail
    @url  = 'www.citoyens-producteurs.fr' 
    # c'est cet appel à mail() qui permet d'envoyer l’e-mail en définissant destinataire et sujet.
-   #mail(to: @user.email, subject: 'Tu as crée un nouvel évènement !') 
+   mail(to: @user.email, subject: 'Tu as crée un nouvel évènement !') 
   end
 
   def event_edit_user(appointment)
@@ -26,14 +26,14 @@ class EventMailer < ApplicationMailer
     @participant = appointment.user
     #on définit une variable @url qu'on utilisera dans la view d’e-mail
     @url  = 'www.citoyens-producteurs.fr' 
-    #mail(to: appointment.user.email, subject: 'Un évènement a été modifié !') 
+    mail(to: appointment.user.email, subject: 'Un évènement a été modifié !') 
 
   end
 
    def ask_feedback(appointment)
     @url  = 'www.citoyens-producteurs.fr' 
     @id = appointment.event_id
-    #mail(to: appointment.user.email, subject: 'Après l\'évènement, le feedback !')
+    mail(to: appointment.user.email, subject: 'Après l\'évènement, le feedback !')
     
    end
 
@@ -42,7 +42,7 @@ class EventMailer < ApplicationMailer
       @event = appointment.event
       @url  = 'www.citoyens-producteurs.fr' 
       @id = appointment.event_id
-      #mail(to: appointment.user.email, subject: 'Un évènement a été supprimé !')
+      mail(to: appointment.user.email, subject: 'Un évènement a été supprimé !')
     end
 
 end

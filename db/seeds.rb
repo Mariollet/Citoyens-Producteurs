@@ -220,7 +220,7 @@ end
   title: Faker::Restaurant.name,
   description: Faker::Restaurant.description,
   start_date: startdate, 
-  end_date: startdate + rand(25000..40000),
+  end_date: startdate + rand(20000..30000),
   address_id: rand(1..20), 
   creator_id: rand(1..20), 
   event_type_id:rand(1..3),

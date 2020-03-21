@@ -1,7 +1,7 @@
 const ratio = 0
 const options = {
     root: null,
-    rootMargin: '10px',
+    rootMargin: '15px',
     threshold: ratio
 }
 

@@ -4,11 +4,11 @@
   <div class="container container-hero">
 
     <div class="row">
-      <div class="col-5 col-xl-6 col-lg-7 col-md-8 col-sm-9 p-0 animated fadeInRight">
+      <div class="col-5 col-xl-6 col-lg-7 col-md-8 col-sm-9 p-0 animated">
       
         <%= image_tag(("logo.png"), class:"hero-logo") %>
         <h1 class="title-slogan">La première coopérative agricole urbaine et citoyenne
-        <br><%= link_to "Rejoignez-nous !", new_user_session_path, class:"btn hero-btn btn-primary btn-rounded btn-lg"%>
+        <br><%= link_to "Rejoignez-nous !", new_user_session_path, class:"btn hero-btn btn-primary btn-rounded btn-lg animated delay-1s"%>
         </h1>
         
       </div>
@@ -17,18 +17,18 @@
   </div>
 </div>
 
-  <div class="container about animated fadeInUp">
+  <div class="container about">
 
     <div class="row">
 
-      <div class="content">
+      <div class="content animated delay-1s">
 
         <h1 class="title-goal mb-3">Notre objectif</h1>
         <hr>
-        <p class="lead"><i class="far fa-heart"></i> &nbsp; Lutter contre le gaspillage alimentaire en récoltant le surplus des producteurs locaux</p>
-        <p class="lead"><i class="far fa-heart"></i> &nbsp; Permettre à chacun de contribuer à une alimentation locale</p>
-        <p class="lead"><i class="far fa-heart"></i> &nbsp;Garantir des produits sains, cultivés près de chez vous, et a très faible impact carbone</p>
-        <p class="lead"><i class="far fa-heart"></i> &nbsp;Contribuer au développement d’une activité locale et responsable</p>
+        <p class="lead animated delay-1s"><i class="far fa-heart"></i> &nbsp; Lutter contre le gaspillage alimentaire en récoltant le surplus des producteurs locaux</p>
+        <p class="lead animated delay-1s"><i class="far fa-heart"></i> &nbsp; Permettre à chacun de contribuer à une alimentation locale</p>
+        <p class="lead animated delay-1s"><i class="far fa-heart"></i> &nbsp;Garantir des produits sains, cultivés près de chez vous, et a très faible impact carbone</p>
+        <p class="lead animated delay-1s"><i class="far fa-heart"></i> &nbsp;Contribuer au développement d’une activité locale et responsable</p>
 
       </div>
 
@@ -37,7 +37,7 @@
   </div>
 
 
-<section class="counter p-4 animated fadeInUp">
+<section class="counter p-4 animated delay-1s">
   <div class="container">
     <div class="row">
       <div class="col-lg-3 col-sm-6 col-12 my-3">
@@ -47,7 +47,7 @@
               <h2><i class="fas fa-seedling"></i></h2>
               <small class="uppercase">Producteurs participants</small>
             </div>
-            <div class="col-7 justify-center align-center"><span class="display-4"><%= Event.where(event_type_id: 1).distinct.count(:creator_id) %></span></div>
+            <div class="col-7 justify-center align-center animated delay-1s"><span class="display-4"><%= Event.where(event_type_id: 1).distinct.count(:creator_id) %></span></div>
           </div>
         </div>
       </div>
@@ -58,7 +58,7 @@
               <h2><i class="fas fa-hand-holding-heart"></i></h2>
               <small class="uppercase">Bénévoles engagés</small>
             </div>
-            <div class="col-7 justify-center align-center"><span class="display-4"><%= Appointment.distinct.count(:user_id) %></span></div>
+            <div class="col-7 justify-center align-center animated delay-1s"><span class="display-4"><%= Appointment.distinct.count(:user_id) %></span></div>
           </div>
         </div>
       </div>
@@ -69,7 +69,7 @@
               <h2><i class="fas fa-seedling"></i></h2>
               <small class="uppercase">Produits récoltés</small>
             </div>
-            <div class="col-7 justify-center align-center"><span class="display-4"><%= Event.where(event_type_id: 1).count %> kg</span></div>
+            <div class="col-7 justify-center align-center animated delay-1s"><span class="display-4"><%= Event.where(event_type_id: 1).count %> kg</span></div>
           </div>
         </div>
       </div>
@@ -80,7 +80,7 @@
               <h2><i class="fas fa-carrot"></i></h2>
               <small class="uppercase">Produits cuisinés</small>
             </div>
-            <div class="col-7 justify-center align-center"><span class="display-4"><%= Event.where(event_type_id: 3).left_outer_joins(:product_events).count %></span></div>
+            <div class="col-7 justify-center align-center animated delay-1s"><span class="display-4"><%= Event.where(event_type_id: 3).left_outer_joins(:product_events).count %></span></div>
           </div> 
         </div>
       </div>
@@ -89,17 +89,17 @@
 </section>
 
 <section id="about">
-  <div class="container about animated fadeInUp">
+  <div class="container about">
   
     <div class="row">
 
       <div class="content">
       
-        <h1 class="title-about">La coopérative agricole urbaine et citoyenne !</h1>
+        <h1 class="title-about animated delay-1s">La coopérative agricole urbaine et citoyenne !</h1>
         
         <hr>
 
-        <p class="lead text-center">
+        <p class="lead text-center animated delay-1s">
         Citoyens Producteurs est un projet de coopérative agricole urbaine unique en son genre !
         <br>De nombreux jardins urbains sont la source de biens belles récoltes, mais souvent ces fruits ou ces légumes ne sont pas exploités.
         <br>C’est là qu’intervient Citoyens Producteurs, en récupérant le surplus de production dans les jardins citoyens !
@@ -109,7 +109,7 @@
 
         <hr>
 
-        <div class="mt-5 animated fadeInUp delay-1s">
+        <div class="mt-5 animated delay-1s">
           <div class="box">
             <div class="icon"><i class="fas fa-seedling"></i></div>
             <h4 class="title">Producteurs</a></h4>
@@ -118,7 +118,7 @@
         </div>
         <br>
 
-        <div class="animated fadeInUp delay-2s">
+        <div class="animated delay-1s">
           <div class="box">
             <div class="icon"><i class="fas fa-hand-holding-heart"></i></div>
             <h4 class="title">Bénévoles</a></h4>
@@ -127,7 +127,7 @@
         </div>
         <br>
 
-        <div class="animated fadeInUp delay-3s">
+        <div class="animated delay-1s">
           <div class="box">
             <div class="icon"><i class="fas fa-utensils"></i></div>
             <h4 class="title">Produits transformés</a></h4>
@@ -135,7 +135,7 @@
           </div>
         </div>
 
-        <div class="btnsuccess text-center animated fadeInUp delay-4s">
+        <div class="btnsuccess text-center animated delay-2s">
           <a class="btn btn-lg btn-primary btn-rounded m-2" <%= link_to "En savoir plus", community_path %></a><br>
         </div>
     </div>
@@ -143,7 +143,7 @@
   </div>
 </section>
 
-<div id="carousel" class="carousel slide carousel-fade animated fadeInUp" data-ride="carousel">
+<div id="carousel" class="carousel slide carousel-fade animated delay-1s" data-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active" data-interval="2000">
       <%=image_tag 'https://images.pexels.com/photos/48817/jam-preparations-jars-fruit-48817.jpeg?auto=compress&cs=tinysrgb&h=650&w=940', class:"d-block w-100" %>
@@ -160,53 +160,59 @@
 
 <section id="contact">
   
-  <div class="col-10 mx-auto p-4 text-center animated fadeInUp">
+  <div class="col-10 mx-auto p-4 text-center">
 
     <div class="row">
 
-      <div class="col-12 my-3">
+      <div class="col-12 my-3 animated delay-1s">
 
         <h2 class="title-contact" >Nous sommes là pour vous</h2>
         <div class="col-12 p-0">
 
-          <div class="card border-5 shadow my-5">
+          <div class="card border-5 material-shadow my-5 animated delay-1s">
 
-            <h4 class="uppercase my-2 mt-4 font-title">Adresse :</h4>
+            <div class="animated delay-1s">
+              <h4 class="uppercase my-2 mt-4 font-title">Adresse :</h4>
 
-            <br>
+              <br>
 
-            <p class="mb-4">
-            <i class="fas fa-map-marker-alt"></i> Bourg-la-Reine, 92340<br> 420 Rue du Citoyens
-            <br><br>
-            <i class="fas fa-clock"></i> Ouvert du lundi au vendredi de 8h à 20h30
-            </p>
+              <p class="mb-4">
+              <i class="fas fa-map-marker-alt"></i> Bourg-la-Reine, 92340<br> 420 Rue du Citoyens
+              <br><br>
+              <i class="fas fa-clock"></i> Ouvert du lundi au vendredi de 8h à 20h30
+              </p>
 
-            <br>
+              <br>
+            </div>
 
-            <h4 class="uppercase my-2 font-title">Contact :</h4>
+            <div class="animated delay-1s">
+              <h4 class="uppercase my-2 font-title">Contact :</h4>
 
-            <br>
+              <br>
 
-            <p class="mb-4">
-            <i class="fa fa-phone mr-2"></i>06 83 87 04 95<br><br>
-            <i class="fa fa-envelope mr-2"></i> citoyens-producteurs@lilo.org
-            </p>
+              <p class="mb-4">
+              <i class="fa fa-phone mr-2"></i>06 83 87 04 95<br><br>
+              <i class="fa fa-envelope mr-2"></i> citoyens-producteurs@lilo.org
+              </p>
 
-            <br>
+              <br>
+            </div>
 
-            <h4 class="uppercase my-2 font-title">Suivez-nous !</h4>
+            <div class="animated delay-1s">
+              <h4 class="uppercase my-2 font-title">Suivez-nous !</h4>
 
-            <br>
+              <br>
 
-            <p>
-            <%= link_to "", "https://www.facebook.com/CitoyensProducteurs/", class:"fab fa-facebook m-1 fa-2x", :target => '_blank'%>
-            <%= link_to "", "https://twitter.com/CProducteurs", class:"fab fa-twitter m-1 fa-2x", :target => '_blank'%>
-            <%= link_to "", "https://www.instagram.com/citoyensproducteurs/", class:"fab fa-instagram m-1 fa-2x", :target => '_blank'%>
-            </p>
+              <p>
+              <%= link_to "", "https://www.facebook.com/CitoyensProducteurs/", class:"fab fa-facebook m-1 fa-2x", :target => '_blank'%>
+              <%= link_to "", "https://twitter.com/CProducteurs", class:"fab fa-twitter m-1 fa-2x", :target => '_blank'%>
+              <%= link_to "", "https://www.instagram.com/citoyensproducteurs/", class:"fab fa-instagram m-1 fa-2x", :target => '_blank'%>
+              </p>
 
-            <br>
+              <br>
+            </div>
           
-            <iframe class="p-relative home-maps"
+            <iframe class="p-relative home-maps animated delay-1s"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d10516.376138168858!2d2.31667645!3d48.780095!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6712a13518e05%3A0x40b82c3688b3e80!2s92340%20Bourg-la-Reine!5e0!3m2!1sfr!2sfr!4v1575456577997!5m2!1sfr!2sfr"
             allowfullscreen>
             </iframe>

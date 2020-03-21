@@ -197,7 +197,7 @@
     text-align: center;
     font-weight: 700;
     margin-bottom: 5px;
-    background: linear-gradient(to bottom, #fff, #fff 50%, #fff 60%, #9F9B30 60%);
+    background: linear-gradient(to bottom, #fff, #fff, #fff 72%, #9F9B30 30%);
 }
 
 .title-about {
@@ -207,7 +207,7 @@
     text-align: center;
     font-weight: 700;
     margin-bottom: 5px;
-    background: linear-gradient(to bottom, #fff, #fff 50%, #fff 60%, #9F9B30 60%);
+    background: linear-gradient(to bottom, #fff, #fff, #fff 72%, #9F9B30 30%);
 }
 
 .title-contact {
@@ -216,7 +216,7 @@
     text-transform: uppercase;
     text-align: center;
     font-weight: 700;
-    background: linear-gradient(to bottom, #fff, #fff 50%, #fff 60%, #9F9B30 60%);
+    background: linear-gradient(to bottom, #fff, #fff, #fff 72%, #9F9B30 30%);
 }
 
 .section-description {
@@ -255,4 +255,8 @@
     width: 100%;
     height: 300px;
     border: 0;
+}
+
+.com-img {
+    border-radius: 5%;
 }

@@ -66,10 +66,27 @@
 
                   <div class="card-header bg-white">
 
-                    <span class="badge badge-secondary float-right">New</span>
-                    <h3 class="blog-title"> <%= link_to blog.title.capitalize, blog_path(blog.id)%>  </h3>
+                    <h3 class="blog-title"> <%= link_to blog.title.capitalize, blog_path(blog.id)%>
+
+
+                    <% if blog.blog_comments.length > 3 %>
+                      <span class="badge badge-light float-right ml-2"><%= image_tag(("comment.png"), class:"best") %></span>
+                    <% end %>
+                    <% if blog.likes.length > 6 %>
+                      <span class="badge badge-light float-right ml-2"><%= image_tag(("like.png"), class:"best") %></span>
+                    <% end %>
+                    <% if blog.created_at > DateTime.now - 7 %>
+                      <span class="badge badge-secondary float-right">Récent</span> 
+                    <% end %>
+
+                    </h3>
                     <%= image_tag((blog.user.avatar), class:"d-flex mr-3  -circle blog-avatar") %>
-                    <h5 class="lead mt-3 text-muted"><%= blog.user.last_name %> <%= blog.user.first_name %></h5>
+                    <h5 class="lead mt-3 text-muted">
+                    <% if blog.user.created_events.length + blog.user.appointments.length + blog.user.blogs.length < 10 %>
+                      <span class="badge badge-secondary badge-pill mr-1">★</span>
+                    <% end%>
+                    <i><%= blog.user.last_name %> <%= blog.user.first_name %></i>
+                    </h5>
 
                   </div>
                     

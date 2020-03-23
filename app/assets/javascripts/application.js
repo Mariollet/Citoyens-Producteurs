@@ -16,3 +16,4 @@
 //= require activestorage
 //= require sidebar
 //= require navbar
+//= require blog

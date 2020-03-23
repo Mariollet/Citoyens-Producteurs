@@ -1,4 +1,4 @@
-function searchFunction() {
+function blogsearchFunction() {
     var input, filter, allblogs, blog, a, i;
     input = document.getElementById('blogsearch');
     filter = input.value.toUpperCase();

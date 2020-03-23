@@ -17,3 +17,4 @@
 //= require sidebar
 //= require navbar
 //= require blog
+//= require event

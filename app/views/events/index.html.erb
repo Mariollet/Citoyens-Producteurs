@@ -3,61 +3,91 @@
   <div class="card border-0 shadow my-5" id="event">
     <div class="card-body p-5">
 
-      <h1 class="font-weight-light">Liste des évenements 🍓</h1>
-      <hr>
-
       <div class="row">
 
         <div class="col-md-8 col-sm-12 p-0">
 
-          <% @events.each do |event| %>
-          
-          <div class="card mb-4 animated">
-
-            <div class="card-header bg-white">
-
-              <h2 class="m-0"><%= event.title %>
-              <% if event.event_type.id == 1 %>
-                <span class="badge badge-pill badge-success float-right"><%= event.event_type.name %></span>
-              <% elsif event.event_type.id == 2 %>
-                <span class="badge badge-pill badge-danger float-right"><%= event.event_type.name %></span>
-              <% elsif event.event_type.id == 3 %>
-                <span class="badge badge-pill badge-warning float-right"><%= event.event_type.name %></span>
-              <% end %>
-              </h2>
-
-            </div>
-
-            <%= image_tag(('https://images.pexels.com/photos/1656665/pexels-photo-1656665.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'), class:"card-img-top p-1") %>
+          <div class="wrapper">
+            <% @events.each do |event| %>
             
-            <div class="card-body p-2">
+            <div class="card mb-4 shadow animated event">
 
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">Le <%=l(event.start_date, format: "%-d %B %Y à %Hh %M")%></li>
-                <% if event.appointments.count > 0 %> 
-                  <li class="list-group-item"><%= event.appointments.count > 1 ? 'Nombre de participants : ' : 'Nombre de participant : ' %> <%= event.appointments.count %></li>
-                <% else %>
-                  <li class="list-group-item">Aucun participant</li>
+              <div class="card-header bg-white">
+
+                <h2 class="event-title"><%= event.title %>
+                <% if event.event_type.id == 1 %>
+                  <span class="badge badge-pill badge-success float-right"><%= event.event_type.name %></span>
+                <% elsif event.event_type.id == 2 %>
+                  <span class="badge badge-pill badge-danger float-right"><%= event.event_type.name %></span>
+                <% elsif event.event_type.id == 3 %>
+                  <span class="badge badge-pill badge-warning float-right"><%= event.event_type.name %></span>
                 <% end %>
-                <li class="list-group-item">Quartier : <%= event.address.sector %></li>
-                <li class="list-group-item">Local : <%= event.address.city%></li>
-              </ul>
+                </h2>
+                
+                <%= image_tag((event.creator.avatar), class:"d-flex mr-3  -circle event-avatar") %>
+                <h5 class="lead mt-3 text-muted creator"><%= event.creator.last_name %> <%= event.creator.first_name %>
+                <% if event.end_date.strftime("%-d %B %Y à %Hh %M") > DateTime.now.strftime("%-d %B %Y à %Hh %M") %>
+                  <span class="badge badge-pill badge-dark float-right">Terminé</span>
+                <% else %>
+                  <span class="badge badge-pill badge-light float-right">Disponible</span>
+                <% end %></h5>
 
-              <div class="text-center">
 
-                <%= link_to "Voir l'évenement", event_path(event.id), class:"btn btn-md btn-outline-success btn-block mt-2 mb-1" %>
+              </div>
+
+              <div class="row">
+              
+                <div class="col-4 sm-12">
+                <%= image_tag(('https://images.pexels.com/photos/2294477/pexels-photo-2294477.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'), class:"card-img p-4 event-img") %>
+                </div>
+                
+                <div class="col">
+
+                  <div class="card-body p-2">
+
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item lead date">Commence le <%=l(event.start_date, format: "%-d %B %Y à %Hh %M")%></li>
+                      <% if event.appointments.count > 0 %> 
+                        <li class="list-group-item"><%= event.appointments.count > 1 ? 'Nombre de participants : ' : 'Nombre de participant : ' %> <%= event.appointments.count %></li>
+                      <% else %>
+                        <li class="list-group-item">Aucun participant</li>
+                      <% end %>
+                      <li class="list-group-item adress">Quartier : <%= event.address.sector %></li>
+                      <li class="list-group-item city">Ville : <%= event.address.city%></li>
+                    </ul>
+
+                    <div class="text-center">
+
+                      <%= link_to "Voir l'évenement", event_path(event.id), class:"btn btn-md btn-outline-success btn-block mt-2 mb-1" %>
+                    
+                    </div>
+
+                  </div>
+
+                </div>
               
               </div>
 
             </div>
 
+            <% end %>
           </div>
-
-          <% end %>
 
         </div>
 
         <div class="col-md-4 events-aside">
+
+          <div class="card mb-4">
+            <h5 class="card-header">Rechercher un évenement :</h5>
+            <div class="card-body">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Catégories, quartiers..." id="eventsearch" onkeyup="eventsearchFunction()">
+                <span class="input-group-btn">
+                  <button class="btn btn-outline-secondary disabled" type="button"><i class="fa fa-search"></i></button>
+                </span>
+              </div>
+            </div>
+          </div>
 
           <div class="card mb-4"> 
             
@@ -74,7 +104,7 @@
 
           </div>
 
-          <div class="card my-4">
+          <div class="card mb-4">
 
             <h5 class="card-header bg-white">Local</h5>
 

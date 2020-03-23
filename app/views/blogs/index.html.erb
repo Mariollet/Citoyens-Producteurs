@@ -82,8 +82,8 @@
                     </h3>
                     <%= image_tag((blog.user.avatar), class:"d-flex mr-3  -circle blog-avatar") %>
                     <h5 class="lead mt-3 text-muted">
-                    <% if blog.user.created_events.length + blog.user.appointments.length + blog.user.blogs.length < 10 %>
-                      <span class="badge badge-secondary badge-pill mr-1">★</span>
+                    <% if blog.user.created_events.length + blog.user.appointments.length + blog.user.blogs.length < 9 %>
+                      <span class="badge badge-light badge-pill mr-1">★</span>
                     <% end%>
                     <i><%= blog.user.last_name %> <%= blog.user.first_name %></i>
                     </h5>

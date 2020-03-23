@@ -25,7 +25,11 @@
                 </h2>
                 
                 <%= image_tag((event.creator.avatar), class:"d-flex mr-3  -circle event-avatar") %>
-                <h5 class="lead mt-3 text-muted creator"><%= event.creator.last_name %> <%= event.creator.first_name %>
+                <h5 class="lead mt-3 text-muted creator">
+                <% if event.creator.created_events.length + event.creator.appointments.length + event.creator.blogs.length < 9 %>
+                  <span class="badge badge-light badge-pill mr-1">★</span>
+                <% end%>
+                <%= event.creator.last_name %> <%= event.creator.first_name %>
                 <% if event.end_date.strftime("%-d %B %Y à %Hh %M") > DateTime.now.strftime("%-d %B %Y à %Hh %M") %>
                   <span class="badge badge-pill badge-dark float-right">Terminé</span>
                 <% else %>
@@ -78,7 +82,7 @@
         <div class="col-md-4 events-aside">
 
           <div class="card mb-4">
-            <h5 class="card-header">Rechercher un évenement :</h5>
+            <h5 class="card-header title">Rechercher un évenement :</h5>
             <div class="card-body">
               <div class="input-group">
                 <input type="text" class="form-control" placeholder="Catégories, quartiers..." id="eventsearch" onkeyup="eventsearchFunction()">
@@ -92,7 +96,7 @@
           <div class="card mb-4"> 
             
             <div class-="card-header">
-              <h5 class="card-header bg-white">Et si tu créais ton événement?</h5>
+              <h5 class="card-header bg-white title">Tout le monde y gagne !</h5>
             </div>  
 
             <div class="card-body text-center">
@@ -106,7 +110,7 @@
 
           <div class="card mb-4">
 
-            <h5 class="card-header bg-white">Local</h5>
+            <h5 class="card-header bg-white title">Ville partenaires</h5>
 
             <div class="card-body p-1">
               <div class="row">

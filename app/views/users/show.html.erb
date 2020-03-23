@@ -1,20 +1,14 @@
 <% I18n.locale = :fr%>
 <div class="container">
   <div class="card border-0 shadow my-5" id="user-contain">
-    <div class="card-body p-5">
-      <h1 class="font-weight-light">Mon espace 🌾</h1>
-      <hr>
+    <div class="card-body p-4">
 
-      <div class="col-lg-8 col-20 mx-auto">
+      <div class="col-lg-9 col-20 mx-auto">
         <div class="card my-3 card-people-4" id="card-info">
           <div class="card-header p-5 background-cover"  style="background-image:url('/assets/kiwi.jpeg')">
           </div>
           <div class="card-body p-relative font-title text-center">
-            <h4 class="mx-2">Bonjour <%= current_user.first_name%> 
-            <% if current_user.has_payed == true %>
-            🌱
-            <% end %>
-            </h4>
+            <h3 class="mx-2 title">Bonjour <%= current_user.first_name%></h3>
 
             <% if flash[:destroyed] %>
               <div class="alert alert-danger text-center" role="alert">
@@ -30,11 +24,31 @@
 
             <h4>Mon profil :</h4>
 
+              <% if current_user.created_events.length + current_user.appointments.length + current_user.blogs.length > 9 %>
+                <button class="btn btn-info m-2" type="button" onclick="window.location.href = '#calendar'">
+                  Confirmé <br> <span class="badge badge-light p-1">★</span>
+                </button>
+              <% else %>
+                <button class="btn btn-info m-2" type="button" onclick="window.location.href = '#calendar'">
+                  Confirmé <br> <span class="badge badge-light p-1">&nbsp&nbsp&nbsp&nbsp</span>
+                </button>
+              <% end %>
+              <% if current_user.has_payed == true %>
+                <button class="btn btn-info m-2" type="button" onclick="window.location.href = '#adherent'">
+                  Adhérent <br> <span class="badge badge-light p-1">🌱</span>
+                </button>
+              <% else %>
+                <button class="btn btn-info m-2" type="button" onclick="window.location.href = '#adherent'">
+                  Adhérent <br> <span class="badge badge-light p-1">&nbsp&nbsp&nbsp&nbsp</span>
+                </button>
+              <% end %>
+
             <p>
               <button class="btn btn-success m-2" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                 Niveau <span class="badge badge-light"><%= current_user.created_events.length + current_user.appointments.length + current_user.blogs.length %></span>
               </button>
             </p>
+
 
             <div class="collapse" id="collapseExample">
               <div class="card card-body">
@@ -43,12 +57,12 @@
             </div>
 
             <div class="progress">
-              <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: <%= (current_user.created_events.length + current_user.appointments.length + current_user.blogs.length) * 4 %>%"></div>
+              <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: <%= (current_user.created_events.length + current_user.appointments.length + current_user.blogs.length) * 10 %>%"></div>
             </div>
             
             <div class="flex my-3">
 
-              <div class="col p-3"><p><%=current_user.created_events.length%></p><h6 class="my-1 font-body">Évenements organisés</h6><br>
+              <div class="col p-3"><p><%=current_user.created_events.length%> 🥕</p><h6 class="my-1 font-body">Évenements organisés</h6><br>
                 <button type="button" class="btn btn-outline-secondary btn-rounded m-2" data-toggle="modal" data-target=".bd-event-modal-xl">Voir</button>
                 <div class="modal fade bd-event-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
                   <div class="modal-dialog modal-xl">
@@ -100,7 +114,7 @@
                 </div>
               </div>
 
-              <div class="col p-3"><p><%=current_user.appointments.length%></p><h6 class="my-1 font-body">Participations</h6><br>
+              <div class="col p-3"><p><%=current_user.appointments.length%> <%= image_tag(('like.png'), class:"best") %></p><h6 class="my-1 font-body">Participations</h6><br>
                 <button type="button" class="btn btn-outline-secondary btn-rounded m-2" data-toggle="modal" data-target=".bd-participate-modal-xl">Voir</button>
                 <div class="modal fade bd-participate-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
                   <div class="modal-dialog modal-xl">
@@ -121,7 +135,7 @@
                             </thead>
                             <tbody>
 
-                              <h2 class="font-weight-bold">Mes participations 🥕</h2>
+                              <h2 class="font-weight-bold">Mes participations <%= image_tag(('like.png'), class:"best-show") %></h2>
 
                               <% current_user.appointments.each do |appointment|%>
 
@@ -148,7 +162,7 @@
                 </div>
               </div>
 
-              <div class="col p-3"><p><%=current_user.blogs.length%></p><h6 class="my-1 font-body">Articles postés</h6><br>
+              <div class="col p-3"><p><%=current_user.blogs.length%> <%= image_tag(('comment.png'), class:"best") %></p><h6 class="my-1 font-body">Articles postés</h6><br>
                 <button type="button" class="btn btn-outline-secondary btn-rounded m-2" data-toggle="modal" data-target=".bd-blog-modal-xl">Voir</button>
                 <div class="modal fade bd-blog-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
                   <div class="modal-dialog modal-xl">
@@ -170,7 +184,7 @@
                             </thead>
                             <tbody>
 
-                              <h2 class="font-weight-bold">Articles postés 🥕</h2>
+                              <h2 class="font-weight-bold">Articles postés <%= image_tag(('comment.png'), class:"best-show") %></h2>
 
                               <% current_user.blogs.each do |blog|%>
 
@@ -204,7 +218,7 @@
 
       <br>
 
-      <h1 class="font-weight-light">Mon calendrier 🗓</h1>
+      <h1 class="title text-center" id="calendar">Calendrier des évenements 🗓</h1>
       <hr>
 
       <div id='scheduler_here' class='dhx_cal_container' style='width:100%; height:800px;'>
@@ -276,47 +290,44 @@
           dp.init(scheduler);
           dp.setTransactionMode('GET', false);
       </script>
+      <hr>
 
       <br>
 
-      <h1 class="font-weight-light">Devenir adhérent 🌱</h1>
+      <h1 class="title text-center" id="adherent">Devenir adhérent 🌱</h1>
       <hr>
-      <br> 
       <% if current_user.has_payed == false %>
-        <div class="col-lg-8 col-20 mx-auto">
-          <div class="card my-8 card-people-4 " id="card-info">
+        <div class="col-lg-9 col-20 mx-auto">
+          <div class="card p-4 card-people-4 " id="card-info">
             <br>
-            <div class="row justify-content-center">
-              <ul class="text-center">
-                <li>Devenir adhérent permet d'acquérir des parts sociales de la coopérative</li>
-                <li>En faisant l'acquisition de parts sociales de la coopérative, vous en deviendrez copropriétaire avec les autres membres.
-                <br>Vous pourrez participer à l'ensemble des décisions prises au sein de la structure
-                <br>et vous obtenez une voix lors de l'assemblée générale.</li>
-                <li><br>Le prix est de <%= @amount.to_i/100  %> €</li>
-              </ul>
-            </div>
-            <div class="row justify-content-center">
-              <ul>
-                <%= form_tag(user_path, method: "patch") do%>
-                  <article>
-                    <% if flash[:error].present? %>
-                      <div id="error_explanation">
-                        <p><%= flash[:error] %></p>
-                      </div>
-                    <% end %>
-                  </article>
+            <p class="text-center">
+              Devenir adhérent permet d'acquérir des parts sociales de la coopérative !<br>
+              En faisant l'acquisition de parts sociales de la coopérative, vous en deviendrez copropriétaire,<br>
+              avec les autres membres.<br>
+              Vous pourrez participer à l'ensemble des décisions prises au sein de la structure<br>
+              et vous obtenez une voix lors de l'assemblée générale.<br>
+              La part sociale est à <%= @amount.to_i/100  %> €
+            </p>
+            <a class="text-center">
+              <%= form_tag(user_path, method: "patch") do%>
+                <article>
+                  <% if flash[:error].present? %>
+                    <div id="error_explanation">
+                      <p><%= flash[:error] %></p>
+                    </div>
+                  <% end %>
+                </article>
 
-                  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-                          data-label="Devenir adhérent"
-                          data-description="Devenir adhérent à Citoyens Producteurs"
-                          data-amount=<%=@amount.to_f %>
-                          data-locale="auto">
-                  </script>
+                <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                        data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                        data-label="Devenir adhérent"
+                        data-description="Devenir adhérent à Citoyens Producteurs"
+                        data-amount=<%=@amount.to_f %>
+                        data-locale="auto">
+                </script>
 
-                <% end %>
-              </ul>
-            </div>
+              <% end %>
+            </a>
           </div>
         </div>
       <% else %>
@@ -324,7 +335,7 @@
           <div class="card my-8 card-people-4 " id="card-info">
             <br>
             <div class="row justify-content-center">
-              <ul class="text-center">
+              <ul >
                 <li><h4>Tu es adhérent à Citoyens Producteurs, merci beaucoup !</h4></li>
                 <li><h5>Nous te préviendrons par email des prochaines assemblées !</h5></li>
               </ul>
@@ -333,6 +344,7 @@
           </div>
         </div>
       <% end %>
+      <br>
 
     </div>
   </div>

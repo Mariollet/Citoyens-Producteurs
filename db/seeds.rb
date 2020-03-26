@@ -94,7 +94,7 @@ end
 
 ########### EVENT_TYPE #################
 
-event_type_array = ["Harvest","Sell","Cooking","Store"]
+event_type_array = ["Récolte","Partage","Cuisine"]
 
 (0..3).each do |i|
 
@@ -127,7 +127,8 @@ user = User.new(
   address_id:rand(1..20),
   store_id: "2",
   phone_number:Faker::PhoneNumber.phone_number,
-  is_admin: true, 
+  is_admin: true,
+  has_payed: true,
 )
 user.save
 puts "Anthony done"
@@ -140,6 +141,7 @@ user = User.new(
   store_id:"2",
   phone_number:Faker::PhoneNumber.phone_number,
   is_admin: true,
+  has_payed: true,
 )
 user.save
 puts "Leo done"
@@ -152,6 +154,7 @@ user = User.new(
   store_id:"2",
   phone_number:Faker::PhoneNumber.phone_number,
   is_admin: true,
+  has_payed: true,
 )
 user.save
 puts "Augustin done"
@@ -164,6 +167,7 @@ user = User.new(
   store_id:"2",
   phone_number:Faker::PhoneNumber.phone_number,
   is_admin: true,
+  has_payed: true,
 )
 user.save
 puts "Thib done"
@@ -176,6 +180,7 @@ user = User.new(
   store_id:"2",
   phone_number:Faker::PhoneNumber.phone_number,
   is_admin: true,
+  has_payed: true,
 )
 user.save
 puts "Lana done"
@@ -199,21 +204,21 @@ puts "Lana done"
   puts "User seed n°#{i + 1}" 
 end
 
-########### STORE_PRODUCT 3rd #################
+########### STORE_PRODUCT #################
 
-(1..25).each do |i|
+(1..100).each do |i|
   storeproduct = StoreProduct.new(
     product_id:rand(0..30),
-    store_id:rand(0..3),
+    store_id:rand(0..1),
     quantity:rand(2..99),
     unit_id: rand(0..arrayunitlength),
   )
   storeproduct.save
   puts "Store_product seed n° #{i}"
 end 
-########### EVENT 4th #################
+########### EVENT #################
 
-  (1..30).each do |i|
+  (1..40).each do |i|
   startdate = rand(t1..t2)
 
   event = Event.new(
@@ -264,7 +269,7 @@ end
 (1..50).each do |i|
   productevent = ProductEvent.new(
     product_id:i,
-    event_id:i ,
+    event_id:i,
     unit_id: rand(1..arrayunitlength),  
     quantity: rand(1..99),
   )

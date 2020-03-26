@@ -19,24 +19,39 @@
 
       <div class="container">
 
-        <div class="row my-2">
+        <div class="row">
 
           <div class="col-lg-7">
             <%= image_tag(("market.jpeg"), class:"img-fluid rounded mb-4 mb-lg-0") %>
           </div>
 
           <div class="col-lg-5">
-            <h3 class="font-weight-bold">Infos :</h3>
+            <h3 class="title">Infos du local :</h3>
             <hr>
+
             <p>
-            <i class="fas fa-map-marker-alt"></i> | 420 Rue du Citoyens, Bourg-la-Reine, 92340
-            <br><br>
-            <i class="fas fa-clock"></i> | Ouvert du lundi au vendredi de 8h à 20h30
-            <br><br>
-            <i class="fas fa-envelope-open"></i> | citoyens-producteurs@lilo.org
-            <br><br>
-            <i class="fas fa-phone-alt"></i> | 06 83 87 04 95
+              <i class="fas fa-map-marker-alt"></i> | 420 Rue du Citoyens, Bourg-la-Reine, 92340
+              <br><br>
+              <i class="fas fa-clock"></i> | Ouvert du lundi au vendredi de 8h à 20h30
+              <br><br>
+              <i class="fas fa-envelope-open"></i> | citoyens-producteurs@lilo.org
+              <br><br>
+              <i class="fas fa-phone-alt"></i> | 06 83 87 04 95
             </p>
+            
+            <p class="text-center">
+            <%= link_to "En savoir plus", root_path(anchor: "about"), class:"btn btn-primary btn-rounded m-2" %>
+            <%= link_to "Contactez nous", root_path(anchor: "contact"), class:"btn btn-primary btn-rounded m-2" %>
+            </p>
+
+            <h4 class="uppercase font-title text-center">Suivez-nous !</h4>
+
+            <p class="text-center">
+            <%= link_to "", "https://www.facebook.com/CitoyensProducteurs/", class:"fab fa-facebook m-1 fa-2x", :target => '_blank'%>
+            <%= link_to "", "https://twitter.com/CProducteurs", class:"fab fa-twitter m-1 fa-2x", :target => '_blank'%>
+            <%= link_to "", "https://www.instagram.com/citoyensproducteurs/", class:"fab fa-instagram m-1 fa-2x", :target => '_blank'%>
+            </p>
+
           </div>
 
         </div>

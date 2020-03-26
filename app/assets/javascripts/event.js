@@ -10,13 +10,15 @@ function eventsearchFunction() {
         tag = event[i].getElementsByTagName('span')[0];
         adress = event[i].getElementsByClassName('adress')[0];
         city = event[i].getElementsByClassName('city')[0];
+        date = event[i].getElementsByClassName('date')[0];
         creator = event[i].getElementsByClassName('creator')[0];
         
         if(title.innerHTML.toUpperCase().indexOf(filter) > -1 ||
-        tag.innerHTML.toUpperCase().indexOf(filter) > -1 ||
-        adress.innerHTML.toUpperCase().indexOf(filter) > -1 ||
-        city.innerHTML.toUpperCase().indexOf(filter) > -1 ||
-        creator.innerHTML.toUpperCase().indexOf(filter) > -1 ){
+        tag.innerHTML.toUpperCase().indexOf(filter) > -1      ||
+        adress.innerHTML.toUpperCase().indexOf(filter) > -1   ||
+        city.innerHTML.toUpperCase().indexOf(filter) > -1     ||
+        creator.innerHTML.toUpperCase().indexOf(filter) > -1  ||
+        date.innerHTML.toUpperCase().indexOf(filter) > -1 ){
 
             event[i].style.display = "";
         }

@@ -1,13 +1,13 @@
 <div class="card">
-  <h5 class="card-header">Laisser un commentaire <%= link_to image_tag(("comment.png"), class:"comment_icon float-right"), blog_path(@blog) %> <span class="float-right"><%= @blog.blog_comments.count %></span> </h5>
+  <h5 class="card-header">Commentaires <%= link_to image_tag(("comment.png"), class:"comment_icon float-right"), blog_path(@blog) %> <span class="float-right"><%= @blog.blog_comments.count %></span> </h5>
   <div class="card-body"> 
     <div class='container'>
 
       <% if user_signed_in? %>
 
         <%= form_with(model: @blog_comment) do |form| %>
-          <h6> Nouveau commentaire : </h6>
-          <p><%= form.text_area :text, class: 'form-control' %></p>
+          <h6> Laissez un commentaire : </h6>
+          <p><%= form.text_area :text, placeholder:"Votre commentaire...", class: 'form-control' %></p>
           <% if user_signed_in? %>
             <%= form.hidden_field :blog_id, value: @blog.id %>
             <%= form.hidden_field :user_id, value: current_user.id %>
@@ -19,7 +19,7 @@
 
         <%= form_with(model: @blog_comment, local: true) do |form| %>
           <h6> Nouveau commentaire : </h6>
-          <p><%= form.text_area :text, class: 'form-control' %></p>
+          <p><%= form.text_area :text, placeholder:"Votre commentaire...", class: 'form-control' %></p>
           <% if user_signed_in? %>
             <%= form.hidden_field :blog_id, value: @blog.id %>
             <%= form.hidden_field :user_id, value: current_user.id %>

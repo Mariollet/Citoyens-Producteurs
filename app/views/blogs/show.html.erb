@@ -48,91 +48,103 @@
         </div>
             
         <div class="card-body p-2">
+          <div class="row">
+            <div class="col">
+              <%= image_tag(('https://images.pexels.com/photos/2228559/pexels-photo-2228559.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'), class:"card-img-top p-2 blog-img") %>
 
-          <%= image_tag(('https://images.pexels.com/photos/2228559/pexels-photo-2228559.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'), class:"card-img-top p-2 blog-img") %>
+              <h6>
+              <%= @blog.content %>
+              </h6>
 
-          <h6>
-          <%= @blog.content %>
-          </h6>
-
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item text-muted">Publié le <%= l(@blog.updated_at, format: "%-d %B %Y à %Hh %M")%></li>
-          </ul>
-
-          <%= render 'blog_comments/form' %>
-
-          <div id="blog-comment">
-            <% @blog.blog_comments.each do |comment| %>
-
-              <div id="blog-comment-<%=comment.id%>">
-                <div class="card p-3">    
-                  <div class="media">
-
-                    <%= image_tag((comment.user.avatar), class:"d-flex mr-3 rounded-circle avatar") %>
-                    <div class="media-body">
-                      <li class="float-right">Posté le <%= l(comment.updated_at,format: "%-d %B %Y à %Hh %M") %></li>
-                      <h5 class="mt-0 text-muted">
-                      <% if comment.user.created_events.length + comment.user.appointments.length + comment.user.blogs.length < 10 %>
-                        <span class="badge badge-light badge-pill mr-1">★</span>
-                      <% end%>
-                      <i><%=  "#{comment.user.first_name}" ' ' "#{comment.user.last_name}"%></i></h5>
-                      <p><%= comment.text %></p>
-                      
-                      <% if user_signed_in? && comment.user == current_user || user_signed_in? && current_user.is_admin == true %>
-
-                        <%= link_to 'Modifier', edit_blog_comment_path(comment, blog_comment: { text: comment.text, user_id: comment.user_id, blog_id: comment.blog_id }), class:"btn btn-sm bg-warning btn-rounded m-1" %>
-                        <%= link_to 'Supprimer', comment, method: :delete, remote: true, class:"btn btn-sm bg-danger btn-rounded m-1" %>
-                        
-                      <% end %>
-                    </div>
-
-
-                  </div>
-                </div>
-              </div>
-
-            <% end %>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item text-muted">Publié le <%= l(@blog.updated_at, format: "%-d %B %Y")%> par <%= @blog.user.last_name %> <%= @blog.user.first_name %></li>
+              </ul>
+            </div>
           </div>
 
-          <div class="text-center">
+          <hr>
 
-            <div class="row">
+          <div class="row text-center">
 
-              <div class="col">
-                <%= link_to "Retour", blogs_path, class:"btn btn-md btn-outline-success m-2" %>
-              </div>      
-              
-              <div class="col", id="blog-<%=@blog.id%>-like">
-
-                <% if user_signed_in? %>
-                  <% pre_like = @blog.likes.find { |like| like.user_id == current_user.id} %>
-                  <% if pre_like %>
-                    <%= @blog.likes.count %><%= link_to image_tag(("like.png"), class:"like"), blog_like_path(@blog, pre_like), method: :delete, remote: true %>
-                  <% else %>
-                    <%= @blog.likes.count %><%= link_to image_tag(("unlike.png"), class:"like"), blog_likes_path(@blog), method: :post, remote: true %>
-                  <% end %>
-                <% else %>
-                  <%= @blog.likes.count %><%= link_to image_tag(("unlike.png"), class:"like"), blog_likes_path(@blog), method: :post %>
-                <% end %>
-                
-              </div>
+            <div class="col">
+              <%= link_to "Retour", blogs_path, class:"btn btn-md btn-outline-success m-2" %>
+            </div>      
+            
+            <div class="col", id="blog-<%=@blog.id%>-like">
 
               <% if user_signed_in? %>
-                <% if current_user.id == @blog.user_id || current_user.is_admin?%>
-
-                  <div class="col">
-                  <%= button_to "Modifier l'article", edit_blog_path(@blog.id), method: 'get', class: 'btn btn-outline-warning m-2' %>
-                  </div>
-
-                  <div class="col">
-                  <%= button_to 'Supprimer', blog_path(@blog.id), method: 'delete', class: 'btn btn-outline-danger m-2' %>
-                  </div>
-                  
+                <% pre_like = @blog.likes.find { |like| like.user_id == current_user.id} %>
+                <% if pre_like %>
+                  <%= @blog.likes.count %><%= link_to image_tag(("like.png"), class:"like"), blog_like_path(@blog, pre_like), title:"Unlike", method: :delete, remote: true %>
+                <% else %>
+                  <%= @blog.likes.count %><%= link_to image_tag(("unlike.png"), class:"like"), blog_likes_path(@blog), title:"Like", method: :post, remote: true %>
                 <% end %>
+              <% else %>
+                <%= @blog.likes.count %><%= link_to image_tag(("unlike.png"), class:"like"), blog_likes_path(@blog), method: :post %>
               <% end %>
-                
-              </div>
+              
             </div>
+
+            <% if user_signed_in? %>
+              <% if current_user.id == @blog.user_id || current_user.is_admin?%>
+
+                <div class="col">
+                <%= link_to '<i class="fas fa-recycle"></i>'.html_safe, edit_blog_path(@blog.id), method: 'get', title:"Modifier", class: 'btn btn-outline-warning m-2' %>
+                </div>
+
+                <div class="col">
+                <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, blog_path(@blog.id), method: 'delete', title:"Supprimer", class: 'btn btn-outline-danger m-2' %>
+                </div>
+                
+              <% end %>
+            <% end %>
+              
+          </div>
+
+          <hr>
+
+          <div class="row">
+            <div class="col">
+            
+            <%= render 'blog_comments/form' %>
+
+              <div id="blog-comment">
+                <% @blog.blog_comments.order('created_at DESC').each do |comment| %>
+
+                  <div id="blog-comment-<%=comment.id%>">
+                    <div class="card p-3">    
+                      <div class="media">
+
+                        <%= image_tag((comment.user.avatar), class:"d-flex mr-3 rounded-circle avatar") %>
+                        <div class="media-body">
+                          <li class="float-right">Posté le <%= l(comment.updated_at,format: "%-d %B %Y à %Hh %M") %></li>
+                          <h5 class="mt-0 text-muted">
+                          <% if comment.user.created_events.length + comment.user.appointments.length + comment.user.blogs.length < 10 %>
+                            <span class="badge badge-light badge-pill mr-1">★</span>
+                          <% end%>
+                          <i><%=  "#{comment.user.first_name}" ' ' "#{comment.user.last_name}"%></i></h5>
+                          <p><%= comment.text %></p>
+                          
+                          <% if user_signed_in? && comment.user == current_user || user_signed_in? && current_user.is_admin == true %>
+
+                            <%= link_to '<i class="fas fa-recycle"></i>'.html_safe, edit_blog_comment_path(comment, blog_comment: { text: comment.text, user_id: comment.user_id, blog_id: comment.blog_id }), title:"Modifier", class:"btn btn-sm btn-outline-warning btn-rounded m-1" %>
+                            <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, comment, method: :delete, remote: true, title:"Supprimer", class:"btn btn-sm btn-outline-danger btn-rounded m-1" %>
+
+                          <% end %>
+                        </div>
+
+
+                      </div>
+                    </div>
+                  </div>
+
+                <% end %>
+              </div>
+
+            </div>
+          </div>
+
+
 
         </div>
 

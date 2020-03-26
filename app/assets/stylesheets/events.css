@@ -4,6 +4,7 @@
 
 .event-img {
   border-radius: 18%;
+  object-fit: cover;
 }
 
 .event-title {
@@ -19,6 +20,6 @@
 }
 
 .event-avatar {
-  height: 40px;
+  height: 42px;
   float: left;
 }

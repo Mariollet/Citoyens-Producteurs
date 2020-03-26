@@ -44,7 +44,7 @@
                   <span class="badge badge-light badge-pill mr-1">★</span>
                 <% end%>
                 <%= event.creator.last_name %> <%= event.creator.first_name %>
-                <% if event.end_date.strftime("%-d %B %Y à %Hh %M") > DateTime.now.strftime("%-d %B %Y à %Hh %M") %>
+                <% if event.end_date < DateTime.now %>
                   <span class="badge badge-pill badge-dark float-right">Terminé</span>
                 <% else %>
                   <span class="badge badge-pill badge-light float-right">Disponible</span>
@@ -53,35 +53,47 @@
 
               </div>
 
-              <div class="row">
-              
-                <div class="col-4 sm-12">
-                <%= image_tag(('https://images.pexels.com/photos/2294477/pexels-photo-2294477.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'), class:"card-img p-4 event-img") %>
-                </div>
+              <div class="card-body">
+
+                <div class="row">
                 
-                <div class="col">
+                  <div class="col-4 sm-12">
 
-                  <div class="card-body p-2">
+                  <% if event.event_type.id == 1 %>
+                    <%= image_tag(("https://images.pexels.com/photos/1301856/pexels-photo-1301856.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"),  class:"img-fluid card-img p-1 mt-2 event-img") %>
+                  <% elsif event.event_type.id == 2 %>
+                    <%= image_tag(("https://images.pexels.com/photos/1508666/pexels-photo-1508666.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"),  class:"img-fluid card-img p-1 mt-2 event-img") %>
+                  <% elsif event.event_type.id == 3 %>
+                    <%= image_tag(("https://images.pexels.com/photos/2696064/pexels-photo-2696064.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"),  class:"img-fluid card-img p-1 mt-2 event-img") %>
+                  <% end %>
 
-                    <ul class="list-group list-group-flush">
-                      <li class="list-group-item lead">Commence le <a class="date"><%=l(event.start_date, format: "%-d %B %Y à %Hh %M")%></a></li>
-                      <% if event.appointments.count > 0 %> 
-                        <li class="list-group-item"><%= event.appointments.count > 1 ? 'Nombre de participants : ' : 'Nombre de participant : ' %> <%= event.appointments.count %></li>
-                      <% else %>
-                        <li class="list-group-item">Aucun participant</li>
-                      <% end %>
-                      <li class="list-group-item">Quartier : <a class="adress"><%= event.address.sector %></a></li>
-                      <li class="list-group-item">Ville : <a class="city"><%= event.address.city%></a></li>
-                    </ul>
+                  </div>
+  
+                  <div class="col">
 
-                    <div class="text-center">
+                    <div class="card-body p-2">
 
-                      <%= link_to "Voir l'évenement", event_path(event.id), class:"btn btn-md btn-outline-success btn-block mt-2 mb-1" %>
-                    
+                      <ul class="list-group list-group-flush">
+                        <li class="list-group-item lead">Commence le <a class="date"><%=l(event.start_date, format: "%-d %B %Y à %Hh %M")%></a></li>
+                        <% if event.appointments.count > 0 %> 
+                          <li class="list-group-item"><strong><%= event.appointments.count > 1 ? 'Nombre de participants : ' : 'Nombre de participant : ' %> <%= event.appointments.count %></strong></li>
+                        <% else %>
+                          <li class="list-group-item"><strong>Aucun participant</strong></li>
+                        <% end %>
+                        <li class="list-group-item"><strong>Quartier :</strong> <a class="adress"><%= event.address.sector %></a></li>
+                        <li class="list-group-item"><strong>Ville :</strong> <a class="city"><%= event.address.city%></a></li>
+                      </ul>
+
+                      <div class="text-center">
+
+                        <%= link_to "Voir l'évenement", event_path(event.id), class:"btn btn-md btn-outline-success btn-block mt-2 mb-1" %>
+                      
+                      </div>
+
                     </div>
 
                   </div>
-
+                
                 </div>
               
               </div>

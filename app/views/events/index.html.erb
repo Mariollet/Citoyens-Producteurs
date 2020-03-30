@@ -7,7 +7,6 @@
         <div class="carousel-inner">
           <div class="carousel-item active" data-interval="4000">
             <img src="https://images.pexels.com/photos/890507/pexels-photo-890507.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" class="d-block w-100" alt="...">
-            <p>Hello!</p>
           </div>
           <div class="carousel-item" data-interval="4000">
             <img src="https://lhf.glaive.pro/partners/header/1200_140_lhf_2021%20(1)-filters(1200x140).jpg" class="d-block w-100" alt="...">
@@ -75,13 +74,13 @@
 
                       <ul class="list-group list-group-flush">
                         <li class="list-group-item lead">Commence le <a class="date"><%=l(event.start_date, format: "%-d %B %Y à %Hh %M")%></a></li>
-                        <% if event.appointments.count > 0 %> 
+                        <li class="list-group-item"><strong>Ville :</strong> <a class="city"><%= event.address.city%></a></li>
+                        <li class="list-group-item"><strong>Quartier :</strong> <a class="adress"><%= event.address.sector %></a></li>                        
+                        <% if event.appointments.count > 0 %>
                           <li class="list-group-item"><strong><%= event.appointments.count > 1 ? 'Nombre de participants : ' : 'Nombre de participant : ' %> <%= event.appointments.count %></strong></li>
                         <% else %>
                           <li class="list-group-item"><strong>Aucun participant</strong></li>
                         <% end %>
-                        <li class="list-group-item"><strong>Quartier :</strong> <a class="adress"><%= event.address.sector %></a></li>
-                        <li class="list-group-item"><strong>Ville :</strong> <a class="city"><%= event.address.city%></a></li>
                       </ul>
 
                       <div class="text-center">

@@ -41,7 +41,7 @@
           <%= image_tag((@blog.user.avatar), class:"d-flex mr-3 blog-avatar") %>
           <h6 class="lead mt-3 text-muted">
           <% if @blog.user.created_events.length + @blog.user.appointments.length + @blog.user.blogs.length < 9 %>
-            <span class="badge badge-light badge-pill mr-1", title="Citoyen experimenté">★</span>
+            <span class="badge badge-light badge-pill mr-1", title="Citoyen expérimenté">★</span>
           <% end%>
           <i><%= @blog.user.last_name %> <%= @blog.user.first_name %></i></h6>
 
@@ -80,7 +80,7 @@
                   <%= @blog.likes.count %><%= link_to image_tag(("unlike.png"), class:"like"), blog_likes_path(@blog), title:"Like", method: :post, remote: true %>
                 <% end %>
               <% else %>
-                <%= @blog.likes.count %><%= link_to image_tag(("unlike.png"), class:"like"), blog_likes_path(@blog), method: :post %>
+                <%= @blog.likes.count %><%= link_to image_tag(("unlike.png"), class:"like"), blog_likes_path(@blog), title:"Like", method: :post %>
               <% end %>
               
             </div>
@@ -93,7 +93,7 @@
                 </div>
 
                 <div class="col">
-                <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, blog_path(@blog.id), method: 'delete', title:"Supprimer", class: 'btn btn-outline-danger m-2' %>
+                <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, blog_path(@blog.id), method: 'delete', title:"Supprimer", data: {confirm: 'Êtes-vous sûr ?'}, class: 'btn btn-outline-danger m-2' %>
                 </div>
                 
               <% end %>
@@ -120,7 +120,7 @@
                           <li class="float-right">Posté le <%= l(comment.updated_at,format: "%-d %B %Y à %Hh %M") %></li>
                           <h5 class="mt-0 text-muted">
                           <% if comment.user.created_events.length + comment.user.appointments.length + comment.user.blogs.length < 10 %>
-                            <span class="badge badge-light badge-pill mr-1", title="Citoyen experimenté">★</span>
+                            <span class="badge badge-light badge-pill mr-1", title="Citoyen expérimenté">★</span>
                           <% end%>
                           <i><%=  "#{comment.user.first_name}" ' ' "#{comment.user.last_name}"%></i></h5>
                           <p><%= comment.text %></p>

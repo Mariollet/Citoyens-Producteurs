@@ -96,7 +96,7 @@ end
 
 event_type_array = ["Récolte","Partage","Cuisine"]
 
-(0..3).each do |i|
+(0..2).each do |i|
 
   event_type = EventType.new(
     name: event_type_array[i],

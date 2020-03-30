@@ -7,7 +7,6 @@
         <div class="carousel-inner">
           <div class="carousel-item active" data-interval="4000">
             <img src="https://images.pexels.com/photos/890507/pexels-photo-890507.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" class="d-block w-100" alt="...">
-            <p>Hello!</p>
           </div>
           <div class="carousel-item" data-interval="4000">
             <img src="https://lhf.glaive.pro/partners/header/1200_140_lhf_2021%20(1)-filters(1200x140).jpg" class="d-block w-100" alt="...">
@@ -36,7 +35,7 @@
           <%= image_tag((@event.creator.avatar), class:"d-flex mr-3 event-avatar") %>
           <h5 class="lead mt-3 text-muted creator">
           <% if @event.creator.created_events.length + @event.creator.appointments.length + @event.creator.blogs.length < 9 %>
-            <span class="badge badge-light badge-pill mr-1">★</span>
+            <span class="badge badge-light badge-pill mr-1", title="Citoyen expérimenté">★</span>
           <% end%>
           <i><%= @event.creator.last_name %> <%= @event.creator.first_name %></i>
           <% if @event.end_date < DateTime.now %>
@@ -64,12 +63,12 @@
             <div class="col">
               
               <p><strong>Créé par : </strong>
-              <i><%= @event.creator.last_name %> <%= @event.creator.first_name %></i>
               <% if @event.creator.created_events.length + @event.creator.appointments.length + @event.creator.blogs.length < 9 %>
-                <span class="badge badge-light badge-pill mr-1">★</span>
+                <span class="badge badge-light badge-pill mx-1", title="Citoyen expérimenté">★</span>
               <% end%>
+              <i><%= @event.creator.last_name %> <%= @event.creator.first_name %></i>
               <% if @event.creator.has_payed == true %>
-                <span class="badge badge-light badge-pill mr-1">🌱</span>
+                <span class="badge badge-light badge-pill ml-1", title="Citoyen adhérent">🌱</span>
               <% end %>
               </p>
               <p><strong>Ville :</strong> <%= @event.address.city %>
@@ -85,7 +84,25 @@
               <p><strong>Début : </strong><%=l(@event.start_date, format: "%-d %B %Y à %H h %M")%></p>
               <p><strong>Fin : </strong><%=l(@event.end_date, format: "%-d %B %Y à %H h %M")%></p>
               <p><strong>Il y a actuellement <%= @event.appointments.count%> <%= @event.appointments.count > 1 ? 'participants' : 'participant' %></strong></p>
-
+              <% if current_user == @event.creator %>
+                <div class="row">
+                  <div class="col-3">
+                    <%= link_to '<i class="fas fa-recycle"></i>'.html_safe, edit_event_path(@event.id), method: 'get', title:"Modifier", class: 'btn btn-block btn-outline-warning btn-rounded' %>
+                  </div>
+                  <div class="col-3">
+                    <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, event_path(@event.id), params:{destroy_event: true}, title:"Supprimer", method: 'delete', class: 'btn btn-block btn-outline-danger btn-rounded' %>
+                  </div>
+                </div>
+              <% elsif current_user.is_admin == true %>
+                <div class="row">
+                  <div class="col-3">
+                    <%= link_to '<i class="fas fa-recycle"></i>'.html_safe, edit_event_path(@event.id), method: 'get', title:"Modifier", class: 'btn btn-block btn-outline-warning btn-rounded' %>
+                  </div>
+                  <div class="col-3">
+                    <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, event_path(@event.id), params:{destroy_event: true}, title:"Supprimer", method: 'delete',data: {confirm: 'Êtes-vous sûr ?'}, class: 'btn btn-block btn-outline-danger btn-rounded' %>
+                  </div>       
+                </div>
+              <% end %>
             </div>
           </div>
 
@@ -99,47 +116,51 @@
 
           <div class="text-center m-4">
 
-            <!-- Appointment -->
-
-            <% if current_user != @event.creator %>
-              <% if @event.end_date > DateTime.now.strftime %>
-                <% @appointment = @event.appointments.find { |appointment| appointment.user_id == current_user.id} %>   
-                <% if @appointment != nil %>
-                  <%= link_to 'Je ne veux plus participer', event_appointment_path(@event.id, @appointment.id), method: :delete, class: 'btn btn-block btn-outline-danger btn-rounded' %>  
-                <% else %>
-                  <%= link_to 'Participer', new_event_appointment_path(@event.id), class: 'btn btn-block btn-outline-success btn-rounded' %>
-                <% end %>
-              <% end %>
-            <% elsif @event.start_date > DateTime.now %> 
-              <%= button_to 'Editer l\'évènement', edit_event_path(@event.id), method: 'get', class: 'btn btn-block btn-outline-warning btn-rounded' %>
-              <%= button_to 'Supprimer l\'évènement', event_path(@event.id), params:{destroy_event: true}, method: 'delete', class: 'btn btn-block btn-outline-danger btn-rounded' %>
-            <% end %>
-            <% if @event.is_passed == true && current_user == @event.creator %>
-              <%= button_to 'L\'évènement est passé - Demander les feedbacks ! ', {:controller => "events", :action => "update", :is_passed => true,}, method: 'patch', class: 'btn btn-block btn-outline-warning btn-rounded' %>
-            <% end %>          
-
-            <!-- Feedbacks -->
-
-            <hr>
+            <!-- Appointment & Feedbacks -->
 
             <div class="row">
-
-              <div class="col">
-                <%= link_to "Retour", blogs_path, class:"btn btn-block btn-outline-success btn-rounded" %>
-              </div>
-
-              <% if @event.start_date.strftime("%-d %B %Y à %Hh %Mm %Ss") < DateTime.now.strftime("%-d %B %Y à %Hh %Mm %Ss") %>
+              <% if current_user != @event.creator %>
+                <% if @event.end_date > DateTime.now.strftime %>
+                  <% @appointment = @event.appointments.find { |appointment| appointment.user_id == current_user.id} %>   
+                  <% if @appointment != nil %>
+                    <div class="col">
+                      <%= link_to 'Je ne veux plus participer', event_appointment_path(@event.id, @appointment.id), method: :delete, class: 'btn btn-block btn-outline-danger btn-rounded' %>  
+                      <hr>
+                    </div>
+                  <% else %>
+                    <div class="col">
+                      <%= link_to 'Participer', new_event_appointment_path(@event.id), class: 'btn btn-block btn-outline-success btn-rounded' %>
+                      <hr>
+                    </div>
+                  <% end %>
+                <% end %>  
+              <% end %>
+              <% if @event.is_passed == true && current_user == @event.creator %>
+                <div class="col">
+                  <%= link_to 'L\'évènement est passé - Demander les feedbacks ! ', {:controller => "events", :action => "update", :is_passed => true,}, method: 'patch', class: 'btn btn-block btn-outline-info btn-rounded' %>
+                  <hr>
+                </div>
+              <% end %>          
+              <% if @event.start_date < DateTime.now.strftime %>
                 <% if user_signed_in? %>  
                   <% if current_user != @event.creator %>
                       <% @appointment = @event.appointments.find { |appointment| appointment.user_id == current_user.id} %> 
                         <% if @appointment != nil %>
                           <div class="col">
-                          <%= button_to 'Donner un Feedback', new_event_feedback_path(@event.id), method: 'get', class: 'btn btn-block btn-outline-warning btn-rounded' %>
+                            <%= link_to 'Donner un Feedback', new_event_feedback_path(@event.id), method: 'get', class: 'btn btn-block btn-outline-info btn-rounded' %>
+                            <hr>
                           </div>
                         <% end %>
                   <% end %>
                 <% end %>
               <% end %>
+            </div>
+
+            <div class="row">
+
+              <div class="col">
+                <%= link_to "Retour", events_path, class:"btn btn-block btn-outline-success btn-rounded" %>
+              </div>
 
             </div>
 
@@ -164,7 +185,7 @@
                           <li class="float-right">Posté le <%= l(comment.updated_at,format: "%-d %B %Y à %Hh %M") %></li>
                           <h5 class="mt-0 text-muted">
                           <% if comment.user.created_events.length + comment.user.appointments.length + comment.user.blogs.length < 10 %>
-                            <span class="badge badge-light badge-pill mr-1">★</span>
+                            <span class="badge badge-light badge-pill mr-1", title="Citoyen expérimenté">★</span>
                           <% end%>
                           <i><%=  "#{comment.user.first_name}" ' ' "#{comment.user.last_name}"%></i></h5>
                           <p><%= comment.text %></p>

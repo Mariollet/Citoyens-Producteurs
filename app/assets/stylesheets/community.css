@@ -1,4 +1,7 @@
 .header-community {
   background-image: url(/assets/radis.jpg);
-  margin-top: 69px;
+  margin-top: 74px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }

@@ -1,7 +1,7 @@
 <% I18n.locale = :fr%>
 <%if !user_signed_in? %>
 <%= render 'layouts/navbar' %>
-<div class="bg-citizens">
+<div class="bg-citizens pt-4">
 <% end %>
 <div class="container">
   <div class="card material-shadow my-5" id="event">
@@ -70,20 +70,20 @@
 
 
                     <% if blog.blog_comments.length > 3 %>
-                      <span class="badge badge-light float-right ml-2"><%= image_tag(("comment.png"), class:"best") %></span>
+                      <span class="badge badge-light float-right ml-2", title="Top Commentaires"><%= image_tag(("comment.png"), class:"best") %></span>
                     <% end %>
                     <% if blog.likes.length > 6 %>
-                      <span class="badge badge-light float-right ml-2"><%= image_tag(("like.png"), class:"best") %></span>
+                      <span class="badge badge-light float-right ml-2", title="Top Likes"><%= image_tag(("like.png"), class:"best") %></span>
                     <% end %>
                     <% if blog.created_at > DateTime.now - 7 %>
-                      <span class="badge badge-secondary float-right">Récent</span> 
+                      <span class="badge badge-secondary float-right", title="Récent">Récent</span> 
                     <% end %>
 
                     </h3>
                     <%= image_tag((blog.user.avatar), class:"d-flex mr-3  -circle blog-avatar") %>
                     <h5 class="lead mt-3 text-muted">
                     <% if blog.user.created_events.length + blog.user.appointments.length + blog.user.blogs.length < 9 %>
-                      <span class="badge badge-light badge-pill mr-1">★</span>
+                      <span class="badge badge-light badge-pill mr-1", title="Citoyen experimenté">★</span>
                     <% end%>
                     <i><%= blog.user.last_name %> <%= blog.user.first_name %></i>
                     </h5>
@@ -117,19 +117,19 @@
                         <% if user_signed_in? %>
                           <% pre_like = blog.likes.find { |like| like.user_id == current_user.id} %>
                           <% if pre_like %>
-                            <%= blog.likes.count %><%= link_to image_tag(("like.png"), class:"like"), blog_like_path(blog, pre_like), method: :delete, remote: true %>
+                            <%= blog.likes.count %><%= link_to image_tag(("like.png"), class:"like", title:"Unlike"), blog_like_path(blog, pre_like), method: :delete, remote: true %>
                           <% else %>
-                            <%= blog.likes.count %><%= link_to image_tag(("unlike.png"), class:"like"), blog_likes_path(blog), method: :post, remote: true %>
+                            <%= blog.likes.count %><%= link_to image_tag(("unlike.png"), class:"like", title:"Like"), blog_likes_path(blog), method: :post, remote: true %>
                           <% end %>
                         <% else %>
-                          <%= blog.likes.count %><%= link_to image_tag(("unlike.png"), class:"like"), blog_likes_path(blog), method: :post %>
+                          <%= blog.likes.count %><%= link_to image_tag(("unlike.png"), class:"like", title:"Like"), blog_likes_path(blog), method: :post %>
                         <% end %>
 
                       </div>
 
                       <div class="col">
 
-                        <%= blog.blog_comments.count %><%= link_to image_tag(("comment.png"), class:"like"), blog_path(blog) %>
+                        <%= blog.blog_comments.count %><%= link_to image_tag(("comment.png"), class:"like", title:"Commenter"), blog_path(blog) %>
 
                       </div>
 

@@ -12,7 +12,7 @@ window.onscroll = function() {
       document.getElementById("navbar").style.borderBottom = "3px solid transparent";
     }
     if (prevScrollpos > currentScrollPos) {
-      document.getElementById("navbar").style.top = "0";
+      document.getElementById("navbar").style.top = "0px";
     } else {
       document.getElementById("navbar").style.top = "-80px";
     }

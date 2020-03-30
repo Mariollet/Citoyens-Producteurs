@@ -28,20 +28,20 @@
           <%= @blog.title.capitalize %>
 
           <% if @blog.blog_comments.length > 3 %>
-          <span class="badge badge-light float-right ml-2"><%= image_tag(("comment.png"), class:"best-show") %></span>
+          <span class="badge badge-light float-right ml-2", title="Top Commentaires"><%= image_tag(("comment.png"), class:"best-show") %></span>
           <% end %>
           <% if @blog.likes.length > 6 %>
-          <span class="badge badge-light float-right ml-2"><%= image_tag(("like.png"), class:"best-show") %></span>
+          <span class="badge badge-light float-right ml-2", title="Top Likes"><%= image_tag(("like.png"), class:"best-show") %></span>
           <% end %>
           <% if @blog.created_at > DateTime.now - 7 %>
-            <span class="badge badge-secondary float-right">Récent</span> 
+            <span class="badge badge-secondary float-right", title="Publié récemment">Récent</span> 
           <% end %>
           </h1>
 
           <%= image_tag((@blog.user.avatar), class:"d-flex mr-3 blog-avatar") %>
           <h6 class="lead mt-3 text-muted">
           <% if @blog.user.created_events.length + @blog.user.appointments.length + @blog.user.blogs.length < 9 %>
-            <span class="badge badge-light badge-pill mr-1">★</span>
+            <span class="badge badge-light badge-pill mr-1", title="Citoyen experimenté">★</span>
           <% end%>
           <i><%= @blog.user.last_name %> <%= @blog.user.first_name %></i></h6>
 
@@ -120,7 +120,7 @@
                           <li class="float-right">Posté le <%= l(comment.updated_at,format: "%-d %B %Y à %Hh %M") %></li>
                           <h5 class="mt-0 text-muted">
                           <% if comment.user.created_events.length + comment.user.appointments.length + comment.user.blogs.length < 10 %>
-                            <span class="badge badge-light badge-pill mr-1">★</span>
+                            <span class="badge badge-light badge-pill mr-1", title="Citoyen experimenté">★</span>
                           <% end%>
                           <i><%=  "#{comment.user.first_name}" ' ' "#{comment.user.last_name}"%></i></h5>
                           <p><%= comment.text %></p>

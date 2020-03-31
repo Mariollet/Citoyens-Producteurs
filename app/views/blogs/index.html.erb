@@ -84,6 +84,9 @@
                       <span class="badge badge-light badge-pill mr-1", title="Citoyen expérimenté">★</span>
                     <% end%>
                     <i><%= blog.user.last_name %> <%= blog.user.first_name %></i>
+                    <% if blog.user.has_payed == true %>
+                      <span class="badge badge-light badge-pill ml-1", title="Citoyen adhérent">🌱</span>
+                    <% end %>
                     </h5>
 
                   </div>

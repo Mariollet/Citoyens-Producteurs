@@ -93,7 +93,7 @@
                     
                   <div class="card-body p-2">
 
-                    <%= link_to image_tag(('https://images.pexels.com/photos/2228559/pexels-photo-2228559.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'), class:"card-img-top p-2 blog-img"), blog_path(blog.id) %>
+                    <%= link_to image_tag((@blog_img[rand(0..9)]), class:"card-img-top p-2 blog-img"), blog_path(blog.id) %>
 
                     <h6>
                           <% if blog.content.to_s.length > 80 %> 

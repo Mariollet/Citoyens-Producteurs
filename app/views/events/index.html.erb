@@ -40,7 +40,7 @@
                 <%= image_tag((event.creator.avatar), class:"d-flex mr-3  -circle event-avatar") %>
                 <h5 class="lead mt-3 text-muted creator">
                 <% if event.creator.created_events.length + event.creator.appointments.length + event.creator.blogs.length < 9 %>
-                  <span class="badge badge-light badge-pill mr-1">★</span>
+                  <span class="badge badge-light badge-pill mr-1", title="Citoyen expérimenté">★</span>
                 <% end%>
                 <%= event.creator.last_name %> <%= event.creator.first_name %>
                 <% if event.end_date < DateTime.now %>

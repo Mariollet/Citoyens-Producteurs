@@ -1,0 +1,4 @@
+event_comment = document.getElementById("event-comment-<%=@comment.id%>")
+while (event_comment.firstChild) {
+    event_comment.removeChild(event_comment.firstChild);
+}

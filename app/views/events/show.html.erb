@@ -173,7 +173,7 @@
 
               <%= render 'comments/form' %>
               
-              <div id="blog-comment">
+              <div id="event-comment">
                 <% @event.comments.order('created_at DESC').each do |comment| %>
 
                   <div id="event-comment-<%=comment.id%>">
@@ -192,9 +192,9 @@
                           
                           <% if user_signed_in? && comment.user == current_user || user_signed_in? && current_user.is_admin == true %>
 
-                      <%= link_to '<i class="fas fa-recycle"></i>'.html_safe, edit_comment_path(comment, comment: { text: comment.text, user_id: comment.user_id, event_id: comment.event_id }), title:"Modifier", class:"btn btn-sm btn-outline-warning btn-rounded m-1" %>
-                      <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, comment, method: :delete, title:"Supprimer", class:"btn btn-sm btn-outline-danger btn-rounded m-1" %>
-                            
+                            <%= link_to '<i class="fas fa-recycle"></i>'.html_safe, edit_comment_path(comment, comment: { text: comment.text, user_id: comment.user_id, event_id: comment.event_id }), title:"Modifier", class:"btn btn-sm btn-outline-warning btn-rounded m-1" %>
+                            <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, comment, method: :delete, remote: true, title:"Supprimer", class:"btn btn-sm btn-outline-danger btn-rounded m-1" %>
+                                  
                           <% end %>
                         </div>
 

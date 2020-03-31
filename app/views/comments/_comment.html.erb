@@ -1,0 +1,29 @@
+<div id="event-comment-<%=comment.id%>">
+    <div class="card p-3">    
+        <div class="media">
+
+        <%= image_tag((comment.user.avatar), class:"d-flex mr-3 rounded-circle avatar") %>
+        <div class="media-body">
+        
+            <li class="float-right">Posté le <%= l(comment.updated_at,format: "%-d %B %Y à %Hh %M") %></li>
+            <h5 class="mt-0 text-muted">
+
+            <% if comment.user.created_events.length + comment.user.appointments.length + comment.user.blogs.length < 10 %>
+                <span class="badge badge-light badge-pill mr-1", title="Citoyen expérimenté">★</span>
+            <% end%>
+
+            <i><%=  "#{comment.user.first_name}" ' ' "#{comment.user.last_name}"%></i></h5>
+            <p><%= comment.text %></p>
+            
+            <% if user_signed_in? && comment.user == current_user || user_signed_in? && current_user.is_admin == true %>
+
+                <%= link_to '<i class="fas fa-recycle"></i>'.html_safe, edit_comment_path(comment, comment: { text: comment.text, user_id: comment.user_id, event_id: comment.event_id }), title:"Modifier", class:"btn btn-sm btn-outline-warning btn-rounded m-1" %>
+                <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, comment, method: :delete, remote: true, title:"Supprimer", class:"btn btn-sm btn-outline-danger btn-rounded m-1" %>
+                    
+            <% end %>
+        </div>
+
+
+        </div>
+    </div>
+</div>

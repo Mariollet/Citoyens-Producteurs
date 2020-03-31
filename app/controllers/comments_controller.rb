@@ -14,14 +14,14 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = Comment.new(comment_params)
+    @event_comment = Comment.new(comment_params)
     @event = Event.find(comment_params[:event_id])
-    if @comment.save
-      flash[:success] = 'Comment was succesfully created'
-    else
-      flash[:danger] = 'Comment could not be created - check your input'
+    if @event_comment.save
+      respond_to do |format|
+        format.html { redirect_back(fallback_location: @event) }
+        format.js { }
+      end
     end
-    redirect_back(fallback_location: @event)
   end
 
   def update
@@ -33,9 +33,12 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment.destroy
-    flash[:destroyed] = 'Comment was deleted'
-    redirect_back(fallback_location: @event)
+    if @comment.destroy
+      respond_to do |format|
+        format.html { redirect_back(fallback_location: @event) }
+        format.js { }
+      end
+    end
   end
 
   private

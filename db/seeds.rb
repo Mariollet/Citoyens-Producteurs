@@ -281,7 +281,7 @@ end
 
 ########### PRODUCT_APPOINTMENT #################
 
-(1..50).each do |i|
+(1..40).each do |i|
   productappointment = ProductAppointment.new(
     product_id: rand(1..30),
     appointment_id:rand(1..25),
@@ -294,12 +294,14 @@ end
 
 ########### BLOG #################
 
-(1..30).each do |i|
+(1..15).each do |i|
+  startdate = rand(t1..timenow)
 
   blog = Blog.new(
   title: Faker::Restaurant.name,
   content: Faker::Restaurant.description * 6,
-  user_id: rand(1..20), 
+  user_id: rand(1..20),
+  created_at: startdate,
   )
   blog.save
 

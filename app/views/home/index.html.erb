@@ -78,7 +78,7 @@
           <div class="row text-center">
             <div class="col-5 justify-center align-center flex-column py-3">
               <h2><i class="fas fa-utensils"></i></i></h2>
-              <small class="uppercase">Plats cuisinés</small>
+              <small class="uppercase">Recettes cuisinées</small>
             </div>
             <div class="col-7 justify-center align-center animated"><span class="display-4"><%= Event.where(event_type_id: 3).left_outer_joins(:product_events).count %></span></div>
           </div> 

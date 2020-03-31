@@ -38,6 +38,9 @@
             <span class="badge badge-light badge-pill mr-1", title="Citoyen expérimenté">★</span>
           <% end%>
           <i><%= @event.creator.last_name %> <%= @event.creator.first_name %></i>
+          <% if @event.creator.has_payed == true %>
+            <span class="badge badge-light badge-pill ml-1", title="Citoyen adhérent">🌱</span>
+          <% end %>
           <% if @event.end_date < DateTime.now %>
             <span class="badge badge-pill badge-dark float-right">Terminé</span>
           <% else %>
@@ -187,7 +190,11 @@
                           <% if comment.user.created_events.length + comment.user.appointments.length + comment.user.blogs.length < 10 %>
                             <span class="badge badge-light badge-pill mr-1", title="Citoyen expérimenté">★</span>
                           <% end%>
-                          <i><%=  "#{comment.user.first_name}" ' ' "#{comment.user.last_name}"%></i></h5>
+                          <i><%=  "#{comment.user.first_name}" ' ' "#{comment.user.last_name}"%></i>
+                          <% if comment.user.has_payed == true %>
+                            <span class="badge badge-light badge-pill ml-1", title="Citoyen adhérent">🌱</span>
+                          <% end %>
+                          </h5>
                           <p><%= comment.text %></p>
                           
                           <% if user_signed_in? && comment.user == current_user || user_signed_in? && current_user.is_admin == true %>

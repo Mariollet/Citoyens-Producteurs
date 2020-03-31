@@ -1,16 +1,17 @@
 class BlogsController < ApplicationController
   before_action :authenticate_user!, only: [:new]
   before_action :set_blog, only: [:show, :edit,:update, :destroy]
+  before_action :set_img_blog
 
   def index
     @blogs = Blog.all
     @stores = Store.all
   end
-  
+
   def new
     @blog = Blog.new
   end
-  
+
   def create
     @blog = Blog.new(blog_params)
     if @blog.save
@@ -46,6 +47,10 @@ class BlogsController < ApplicationController
 
   def set_blog
     @blog = Blog.find(params[:id])
+  end
+
+  def set_img_blog
+    @blog_img = ['https://images.pexels.com/photos/2228559/pexels-photo-2228559.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940','https://images.pexels.com/photos/261577/pexels-photo-261577.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940','https://images.pexels.com/photos/2113556/pexels-photo-2113556.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940','https://images.pexels.com/photos/3026801/pexels-photo-3026801.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940','https://images.pexels.com/photos/299350/pexels-photo-299350.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940','https://images.pexels.com/photos/3984735/pexels-photo-3984735.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940','https://images.pexels.com/photos/128403/pexels-photo-128403.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940','https://images.pexels.com/photos/5808/food-healthy-vegetables-village.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940','https://images.pexels.com/photos/1084543/pexels-photo-1084543.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940','https://images.pexels.com/photos/2518893/pexels-photo-2518893.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940']
   end
 
   def blog_params

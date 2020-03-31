@@ -43,14 +43,18 @@
           <% if @blog.user.created_events.length + @blog.user.appointments.length + @blog.user.blogs.length < 9 %>
             <span class="badge badge-light badge-pill mr-1", title="Citoyen expérimenté">★</span>
           <% end%>
-          <i><%= @blog.user.last_name %> <%= @blog.user.first_name %></i></h6>
+          <i><%= @blog.user.last_name %> <%= @blog.user.first_name %></i>
+          <% if @blog.user.has_payed == true %>
+            <span class="badge badge-light badge-pill ml-1", title="Citoyen adhérent">🌱</span>
+          <% end %>          
+          </h6>
 
         </div>
             
         <div class="card-body p-2">
           <div class="row">
             <div class="col">
-              <%= image_tag(('https://images.pexels.com/photos/2228559/pexels-photo-2228559.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'), class:"card-img-top p-2 blog-img") %>
+              <%= image_tag((@blog_img[rand(0..9)]), class:"card-img-top p-2 blog-img") %>
 
               <h6>
               <%= @blog.content %>
@@ -122,7 +126,11 @@
                           <% if comment.user.created_events.length + comment.user.appointments.length + comment.user.blogs.length < 10 %>
                             <span class="badge badge-light badge-pill mr-1", title="Citoyen expérimenté">★</span>
                           <% end%>
-                          <i><%=  "#{comment.user.first_name}" ' ' "#{comment.user.last_name}"%></i></h5>
+                          <i><%=  "#{comment.user.first_name}" ' ' "#{comment.user.last_name}"%></i>
+                          <% if comment.user.has_payed == true %>
+                            <span class="badge badge-light badge-pill ml-1", title="Citoyen adhérent">🌱</span>
+                          <% end %>                          
+                          </h5>
                           <p><%= comment.text %></p>
                           
                           <% if user_signed_in? && comment.user == current_user || user_signed_in? && current_user.is_admin == true %>

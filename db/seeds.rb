@@ -206,7 +206,7 @@ end
 
 ########### STORE_PRODUCT #################
 
-(1..100).each do |i|
+(1..25).each do |i|
   storeproduct = StoreProduct.new(
     product_id:rand(0..30),
     store_id:rand(0..1),
@@ -320,7 +320,7 @@ end
 
 ########### BLOG_LIKE #################
 
-(1..111).each do |i|
+(1..130).each do |i|
   like = Like.new(
     user_id:rand(1..20),
     blog_id:rand(1..30),

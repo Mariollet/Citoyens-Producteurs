@@ -21,7 +21,7 @@
         <div class="col-md-8 col-sm-12">
 
           <div class="wrapper">
-            <% @events.each do |event| %>
+            <% @events.order('created_at DESC').each do |event| %>
             
             <div class="card mb-4 shadow animated event">
 
@@ -59,11 +59,11 @@
                   <div class="col-4 sm-12">
 
                   <% if event.event_type.id == 1 %>
-                    <%= image_tag(("https://images.pexels.com/photos/1301856/pexels-photo-1301856.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"),  class:"img-fluid card-img p-1 mt-2 event-img") %>
+                    <%= image_tag(("https://images.pexels.com/photos/1301856/pexels-photo-1301856.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"),  class:"img-fluid card-img p-1 mt-3 event-img") %>
                   <% elsif event.event_type.id == 2 %>
-                    <%= image_tag(("https://images.pexels.com/photos/1508666/pexels-photo-1508666.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"),  class:"img-fluid card-img p-1 mt-2 event-img") %>
+                    <%= image_tag(("https://images.pexels.com/photos/1508666/pexels-photo-1508666.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"),  class:"img-fluid card-img p-1 mt-3 event-img") %>
                   <% elsif event.event_type.id == 3 %>
-                    <%= image_tag(("https://images.pexels.com/photos/2696064/pexels-photo-2696064.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"),  class:"img-fluid card-img p-1 mt-2 event-img") %>
+                    <%= image_tag(("https://images.pexels.com/photos/2696064/pexels-photo-2696064.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"),  class:"img-fluid card-img p-1 mt-3 event-img") %>
                   <% end %>
 
                   </div>
@@ -73,7 +73,7 @@
                     <div class="card-body p-2">
 
                       <ul class="list-group list-group-flush">
-                        <li class="list-group-item lead">Commence le <a class="date"><%=l(event.start_date, format: "%-d %B %Y à %Hh %M")%></a></li>
+                        <li class="list-group-item lead">Commence le <a class="date"><%=l(event.start_date, format: "%-d %B %Y à %Hh%M")%></a></li>
                         <li class="list-group-item"><strong>Ville :</strong> <a class="city"><%= event.address.city%></a></li>
                         <li class="list-group-item"><strong>Quartier :</strong> <a class="adress"><%= event.address.sector %></a></li>                        
                         <% if event.appointments.count > 0 %>
@@ -107,7 +107,7 @@
         <div class="col-md-4 events-aside">
 
           <div class="card mb-4">
-            <h5 class="card-header title">Rechercher un évenement :</h5>
+            <h5 class="card-header">Rechercher un évenement :</h5>
             <div class="card-body">
               <div class="input-group">
                 <input type="text" class="form-control" placeholder="Catégories, quartiers..." id="eventsearch" onkeyup="eventsearchFunction()">
@@ -120,9 +120,7 @@
 
           <div class="card mb-4"> 
             
-            <div class-="card-header">
-              <h5 class="card-header bg-white title">Tout le monde y gagne !</h5>
-            </div>  
+              <h5 class="card-header text-center"><i class="fas fa-carrot"></i> Tout le monde y gagne !</h5>
 
             <div class="card-body text-center">
               <p>
@@ -135,7 +133,7 @@
 
           <div class="card mb-4">
 
-            <h5 class="card-header bg-white title">Ville partenaires</h5>
+            <h5 class="card-header title">Local partenaires</h5>
 
             <div class="card-body p-1">
               <div class="row">

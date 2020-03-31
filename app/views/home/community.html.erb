@@ -158,10 +158,13 @@
         </div>
 
       </div>
+      
     </section>
-
+    <div class="col text-center">
+      <%= link_to "Rejoignez-nous !", new_user_session_path, class:"btn btn-primary btn-rounded btn-lg animated"%>
+    </div>
   </div>
 </section>
-<%if !user_signed_in? %>
+<%if user_signed_in? %>
 <%= render 'layouts/footer' %>
 <% end %>

@@ -1,3 +1,4 @@
+<% I18n.locale = :fr%>
 <div class="container">
   
   <div class="card border-0 shadow my-5" id="store">
@@ -38,12 +39,10 @@
               <i class="fas fa-phone-alt"></i> | 06 83 87 04 95
             </p>
             
-            <p class="text-center">
-            <%= link_to "En savoir plus", root_path(anchor: "about"), class:"btn btn-primary btn-rounded m-2" %>
-            <%= link_to "Contactez nous", root_path(anchor: "contact"), class:"btn btn-primary btn-rounded m-2" %>
+            <p class="text-center mt-4">
+            <%= link_to "En savoir plus", root_path(anchor: "about"), class:"btn btn-outline-success btn-rounded m-2" %>
+            <%= link_to "Contactez nous", root_path(anchor: "contact"), class:"btn btn-outline-success btn-rounded m-2" %>
             </p>
-
-            <h4 class="uppercase font-title text-center">Suivez-nous !</h4>
 
             <p class="text-center">
             <%= link_to "", "https://www.facebook.com/CitoyensProducteurs/", class:"fab fa-facebook m-1 fa-2x", :target => '_blank'%>
@@ -64,7 +63,7 @@
 
         <div class="container text-center p-4">
 
-          <h3 class="font-weight-bold">Produits en stock :</h3>
+          <h3 class="title">Produits en stock :</h3>
           
           <hr>
 
@@ -75,7 +74,7 @@
               <div class="card text-center p-4">
                 
                 <div class="media">
-                  <%= image_tag(("https://images.pexels.com/photos/70862/pexels-photo-70862.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"), class:"d-flex mr-3 rounded-circle avatar") %>
+                  <%= image_tag(("https://images.pexels.com/photos/890507/pexels-photo-890507.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"), class:"d-flex mr-3 rounded-circle avatar") %>
                   <div class="media-body">
                     <h4 class="mt-0"><%= product.product.name %></h4>
                     <p>Quantité : <%= product.quantity %>  <%= product.unit.name %></p>
@@ -86,7 +85,7 @@
 
                 </div>
 
-                <%= link_to 'Créer un événement', new_event_path, class: 'btn btn-sm btn-outline-secondary  btn-block' %>
+                <%= link_to 'Utiliser ce produit', new_event_path, class: 'btn btn-sm btn-outline-success btn-block' %>
               
               </div>
 
